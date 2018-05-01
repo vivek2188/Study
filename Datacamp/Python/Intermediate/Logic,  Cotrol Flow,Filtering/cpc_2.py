@@ -21,7 +21,6 @@ import numpy as np
 
 # Create medium: observations with cars_per_cap between 100 and 500
 cpc = cars.loc[:,"cars_per_cap"]
-print(cpc)
 med = np.logical_and(cpc>100,cpc<500)
 medium = cars[med]
 
