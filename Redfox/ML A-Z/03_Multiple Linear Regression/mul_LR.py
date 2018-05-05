@@ -49,4 +49,3 @@ X_opt = X[:,[0,3]]
 regressor_ols = sm.OLS(endog=y,exog=X_opt).fit()  
 regressor_ols.summary()
 
-y_pred = regressor.predict(X_opt)
