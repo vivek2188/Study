@@ -96,20 +96,3 @@ knn_own.fit(X_train,y_train,n_neighbors=5)
 y_pred = knn_own.predict(X_test)
 accuracy = 1 - len(y_test[y_pred!=y_test])/ len(y_test)
 print('Accuracy of the own Algorithm: ',accuracy)
-
-'''
-def k_nearest_neighbors(data, predict, k=3):
-    distances = []
-    for group in data:
-        for features in data[group]:
-            euclidean_distance = np.linalg.norm(np.array(features)-np.array(predict))
-            distances.append([euclidean_distance, group])
-
-    votes = [i[1] for i in sorted(distances)[:k]]
-    vote_result = Counter(votes).most_common(1)[0][0]
-    confidence = Counter(votes).most_common(1)[0][1] / k
-
-    return vote_result, confidence
-
-print('Accuracy:', correct/total)
-'''
