@@ -71,20 +71,22 @@ class kNearestNeighbors:
         self.y = y_train
     def predict(self,X_test):
         y_pred = np.zeros((len(X_test),))
-        m,n = X_test.shape
-        for i in range(m):
+        for i in range(len(X_test)):
             x_pred = X_test[i]
-            X3 = self.X[:self.n_neighbors,:]
-            y3 = self.y[:self.n_neighbors]
+            Xn = self.X[:self.n_neighbors,:]
+            yn = self.y[:self.n_neighbors]
             for index,x in enumerate(self.X[self.n_neighbors:,:]):
                 dist = np.linalg.norm(x_pred-x)
-                for indx,d in enumerate(X3):
-                    if dist <= np.linalg.norm(x_pred-d):
-                        X3[indx] = x
-                        y3[indx] = y[index]
-                        break
-            class_2 = np.count_nonzero(y3==2)
-            class_4 = np.count_nonzero(y3==4)
+                d = [np.linalg.norm(x_pred-x1) for x1 in Xn]
+                max_val = np.max(d)
+                if(dist <= max_val):
+                    d = list(d)
+                    indx = d.index(max_val)
+                    Xn[indx] = x
+                    yn[indx] = y[index]
+                    d[indx] = dist
+            class_2 = np.count_nonzero(yn==2)
+            class_4 = np.count_nonzero(yn==4)
             if(class_2 > class_4):
                 y_pred[i] = 2
             else:
