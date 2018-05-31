@@ -211,14 +211,14 @@ ratio = 1.0
 n_features = int(sqrt(len(data[0])-1))
 scores = []
 
-for n_trees in range(1,100,8):
+for n_trees in range(1,97,8):
     score = evaluate_algorithm(data,n_trees,max_depth,min_size,ratio,n_features,n_folds)
     print('Accuracy when there are',n_trees,' trees is:',score)
     scores.append(scores)
 
 #Visualising the accuracies with the increasing number of trees
-plt.scatter(list(range(1,100,8)),scores,color='r',linewidth=5)
-plt.plot(list(range(1,100,8)),scores,color='c')
+plt.scatter(list(range(1,97,8)),scores,color='r',linewidth=5)
+plt.plot(list(range(1,97,8)),scores,color='c')
 plt.title('Random Forest Classifier')
 plt.xlabel('Number of trees')
 plt.ylabel('Accuracy')
