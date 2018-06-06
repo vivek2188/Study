@@ -1,7 +1,16 @@
+'''
+Despite coming packed with some classifiers, NLTK is mainly a toolkit focused on natural language processing, and not machine learning specifically. 
+A module that is focused on machine learning is scikit-learn, which is packed with a large array of machine learning algorithms which are optimized in C. 
+Luckily NLTK has recognized this and comes packaged with a special classifier that wraps around scikit learn. 
+In NLTK, this is: nltk.classify.scikitlearn, specifically the class:  SklearnClassifier is what we're interested in.
+This allows us to port over any of the scikit-learn classifiers that are compatible, which is most. 
+'''
 import nltk
 import random
 from nltk.corpus import movie_reviews
 import pickle
+from nltk.classify.scikitlearn import SklearnClassifier
+from sklearn.naive_bayes import MultinomialNB,GaussianNB,BernoulliNB
 
 documents = []
 for category in movie_reviews.categories():
@@ -35,9 +44,18 @@ test_set = featuresets[1900:]
 classifier_f = open('naivebayes.pickle','rb')
 classifier = pickle.load(classifier_f)
 classifier_f.close()
-print("Naive Bayes Classifier Accuracy:",nltk.classify.accuracy(classifier,test_set)*100)
+print("Original Naive Bayes Classifier Accuracy:",nltk.classify.accuracy(classifier,test_set)*100)
 classifier.show_most_informative_features(15)
 
 #save_classifier = open('naivebayes.pickle','wb')
 #pickle.dump(classifier,save_classifier)
 #save_classifier.close()
+
+
+multiNB = SklearnClassifier(MultinomialNB())
+multiNB.train(training_set)
+print("Multinomial Naive Bayes Classifier Accuracy:",nltk.classify.accuracy(multiNB,test_set)*100)
+
+bernoulliNB = SklearnClassifier(BernoulliNB())
+bernoulliNB.train(training_set)
+print("Bernoulli Naive Bayes Classifier Accuracy:",nltk.classify.accuracy(bernoulliNB,test_set)*100)
