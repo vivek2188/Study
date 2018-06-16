@@ -3,8 +3,8 @@ import numpy as np
 import time
 
 #Arrays 
-a = np.random.rand(50000)     # 500 Elements
-b = np.random.rand(50000)     # 500 Elements
+a = np.random.rand(50000)     # 50000 Elements
+b = np.random.rand(50000)     # 50000 Elements
 
 #Vectorised Implementation
 start = time.time()
