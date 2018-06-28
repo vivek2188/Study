@@ -31,7 +31,7 @@ y_pred = np.round(scl_y.inverse_transform(y_pred),2)
 print(y_pred)
 
 #Visualising the SVR results
-X_grid = np.arange(min(X),max(X),0.1)
+X_grid = np.arange(min(X)-1,max(X)+1,0.1)
 X_grid = np.reshape(X_grid,newshape=(len(X_grid),1))
 y_grid = svr.predict(X_grid)
 y_grid = scl_y.inverse_transform(y_grid)
