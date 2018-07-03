@@ -34,13 +34,17 @@ def svm_loss_naive(W, X, y, reg):
       margin = scores[j] - correct_class_score + 1 # note delta = 1
       if margin > 0:
         loss += margin
+        dW[:,j] += X[i]
+        dW[:,y[i]] -= X[i]
 
   # Right now the loss is a sum over all training examples, but we want it
   # to be an average instead so we divide by num_train.
   loss /= num_train
+  dW /= num_train
 
   # Add regularization to the loss.
   loss += reg * np.sum(W * W)
+  dW += 2 * reg * W
 
   #############################################################################
   # TODO:                                                                     #
@@ -69,7 +73,13 @@ def svm_loss_vectorized(W, X, y, reg):
   # Implement a vectorized version of the structured SVM loss, storing the    #
   # result in loss.                                                           #
   #############################################################################
-  pass
+  output = np.dot(X,W)
+  correct_score = output[np.arange(X.shape[0]),y].reshape((len(y),1))
+  margins = np.maximum(output - correct_score +1 , 0)
+  loss += np.sum(margins)
+  loss /= X.shape[0]
+  loss -= 1
+  loss += reg* np.sum(np.multiply(W,W))
   #############################################################################
   #                             END OF YOUR CODE                              #
   #############################################################################
@@ -84,7 +94,13 @@ def svm_loss_vectorized(W, X, y, reg):
   # to reuse some of the intermediate values that you used to compute the     #
   # loss.                                                                     #
   #############################################################################
-  pass
+  margins[margins>0] = 1
+  margins[np.arange(X.shape[0]),y] = 0
+  margins[np.arange(X.shape[0]),y] = - np.sum(margins,axis=1)
+  dW = np.dot(X.T,margins)
+  dW /= X.shape[0]
+  #Regularised Loss
+  dW += 2 * reg * W
   #############################################################################
   #                             END OF YOUR CODE                              #
   #############################################################################
