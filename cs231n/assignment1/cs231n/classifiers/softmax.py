@@ -29,7 +29,25 @@ def softmax_loss_naive(W, X, y, reg):
   # here, it is easy to run into numeric instability. Don't forget the        #
   # regularization!                                                           #
   #############################################################################
-  pass
+  c = W.shape[1]
+  num_train, n_features = X.shape
+  #Compute Softmax
+  Z = np.dot(X,W).T
+  Z = np.exp(Z)
+  Z = Z / np.sum(Z,axis=0).reshape((1,num_train))
+  #Without Regularisation
+  dZ = np.zeros_like(Z)
+  for indx in range(num_train):
+    yi = y[indx]
+    loss += - np.log(Z[yi,indx])
+    dZ[:,indx] += Z[:,indx]
+    dZ[yi,indx] -= 1
+  dW = np.dot(dZ,X).T
+  loss = loss / num_train
+  dW /= num_train
+  #Regularisation
+  loss += 0.5 * reg * np.sum(np.square(W))
+  dW += reg * W
   #############################################################################
   #                          END OF YOUR CODE                                 #
   #############################################################################
@@ -53,7 +71,24 @@ def softmax_loss_vectorized(W, X, y, reg):
   # here, it is easy to run into numeric instability. Don't forget the        #
   # regularization!                                                           #
   #############################################################################
-  pass
+  c = W.shape[1]
+  num_train, n_features = X.shape
+  #Compute Softmax
+  Z = np.dot(X,W).T
+  Z = np.exp(Z)
+  Z = Z / np.sum(Z,axis=0).reshape((1,num_train))
+  #Without Regularisation
+  dZ = np.zeros_like(Z)
+  #Compute Loss and dZ
+  loss =  - np.sum(np.log(Z[y,np.arange(num_train)]))
+  dZ += Z
+  dZ[y,np.arange(num_train)] -= 1
+  dW = np.dot(dZ,X).T
+  loss = loss / num_train
+  dW /= num_train
+  #Regularisation
+  loss += 0.5 * reg * np.sum(np.square(W))
+  dW += reg * W
   #############################################################################
   #                          END OF YOUR CODE                                 #
   #############################################################################
