@@ -1,2 +1,3 @@
 # Study
-Consists of whatever I get to know and its implementation.
+ 
+ It consists of all the new things I learn.
