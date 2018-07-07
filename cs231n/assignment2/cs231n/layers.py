@@ -25,7 +25,10 @@ def affine_forward(x, w, b):
     # TODO: Implement the affine forward pass. Store the result in out. You   #
     # will need to reshape the input into rows.                               #
     ###########################################################################
-    pass
+    n_samples = x.shape[0]
+    x_fun = x.reshape((n_samples,-1))
+    z1 = np.dot(x_fun,w) + b.reshape((1,len(b)))
+    out = z1
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
@@ -50,11 +53,20 @@ def affine_backward(dout, cache):
     - db: Gradient with respect to b, of shape (M,)
     """
     x, w, b = cache
+    n_samples = x.shape[0]
+    x_fun = x.reshape((n_samples,-1))
     dx, dw, db = None, None, None
     ###########################################################################
     # TODO: Implement the affine backward pass.                               #
     ###########################################################################
-    pass
+    dx = np.zeros_like(x_fun)
+    dw = np.zeros_like(w)
+    db = np.zeros_like(b)
+    db = np.sum(dout,axis=0,keepdims=True).T
+    #db /= n_samples
+    dw += np.dot(x_fun.T,dout)
+    dx += np.dot(dout,w.T)
+    dx = dx.reshape(x.shape)
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
@@ -76,7 +88,7 @@ def relu_forward(x):
     ###########################################################################
     # TODO: Implement the ReLU forward pass.                                  #
     ###########################################################################
-    pass
+    out = np.maximum(0,x)
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
@@ -99,7 +111,9 @@ def relu_backward(dout, cache):
     ###########################################################################
     # TODO: Implement the ReLU backward pass.                                 #
     ###########################################################################
-    pass
+    multiplier = np.ones(x.shape)
+    multiplier[x<0] = 0
+    dx = np.multiply(dout,multiplier)
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
@@ -175,7 +189,19 @@ def batchnorm_forward(x, gamma, beta, bn_param):
         # Referencing the original paper (https://arxiv.org/abs/1502.03167)   #
         # might prove to be helpful.                                          #
         #######################################################################
-        pass
+        mean = np.mean(x,axis=0)
+        variance = np.var(x,axis=0)
+
+        z = (x - mean) / np.sqrt(variance+eps)
+        #print('--->',gamma.reshape((1,len(gamma))))
+        #gamma = gamma.reshape((1,len(gamma)))
+        #beta = beta.reshape((1,len(beta)))
+        out = gamma * z + beta                  # out = z_norm
+
+        running_mean = momentum * running_mean + (1 - momentum) * mean
+        running_var = momentum * running_var + (1 - momentum) * variance
+
+        cache = (z,x,gamma,beta,eps,mean,variance)
         #######################################################################
         #                           END OF YOUR CODE                          #
         #######################################################################
@@ -186,7 +212,10 @@ def batchnorm_forward(x, gamma, beta, bn_param):
         # then scale and shift the normalized data using gamma and beta.      #
         # Store the result in the out variable.                               #
         #######################################################################
-        pass
+        z = (x - running_mean) / np.sqrt(running_var)
+        #gamma = gamma.reshape((1,len(gamma)))
+        #beta = beta.reshape((1,len(beta)))
+        out = gamma * z + beta                  # out = z_norm
         #######################################################################
         #                          END OF YOUR CODE                           #
         #######################################################################
@@ -224,7 +253,14 @@ def batchnorm_backward(dout, cache):
     # Referencing the original paper (https://arxiv.org/abs/1502.03167)       #
     # might prove to be helpful.                                              #
     ###########################################################################
-    pass
+    # z_norm  = gamma * (z - mean)/var + beta
+    N = dout.shape[0]
+    z,x,gamma,beta,eps,mean,variance = cache
+    z_norm  = (z - mean) / np.sqrt(variance+eps)
+    dgamma = np.sum(np.multiply(dout,z_norm),axis=0,keepdims=True)
+    dbeta = np.sum(dout,axis=0,keepdims=True)
+
+    dx = 1/N*gamma*(variance+eps)**0.5*(N*dout-np.sum(dout,axis=0)-(x-mean)*(variance+eps)**(-1)*np.sum(dout*(x-mean),axis=0))
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
@@ -373,7 +409,9 @@ def dropout_forward(x, dropout_param):
         # TODO: Implement training phase forward pass for inverted dropout.   #
         # Store the dropout mask in the mask variable.                        #
         #######################################################################
-        pass
+        mask =  np.random.randn(*x.shape) < p
+        out = x * mask
+        out /= p
         #######################################################################
         #                           END OF YOUR CODE                          #
         #######################################################################
@@ -381,7 +419,7 @@ def dropout_forward(x, dropout_param):
         #######################################################################
         # TODO: Implement the test phase forward pass for inverted dropout.   #
         #######################################################################
-        pass
+        out = x.copy()
         #######################################################################
         #                            END OF YOUR CODE                         #
         #######################################################################
@@ -408,7 +446,12 @@ def dropout_backward(dout, cache):
         #######################################################################
         # TODO: Implement training phase backward pass for inverted dropout   #
         #######################################################################
-        pass
+        #Trend = relu -> dropout -> affine
+        # affine input = dropout output
+        # affine backward gives Ddropout
+        # dropout = relu * (mask / keep_prob)
+        dx = dout * mask
+        dx /= dropout_param['p']
         #######################################################################
         #                          END OF YOUR CODE                           #
         #######################################################################
