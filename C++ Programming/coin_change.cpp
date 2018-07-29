@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+int dp[1000][1000];
 
 int find_coins(int a[],int i,int n,int k){
     if(k==0)
@@ -8,8 +9,10 @@ int find_coins(int a[],int i,int n,int k){
         return 0;
     if(i>=n and k>=1)
         return 0;
-    int count = find_coins(a,i+1,n,k) + find_coins(a,i,n,k-a[i]);
-    return count;
+    if(dp[i][k])
+        return dp[i][k];
+    dp[i][k] = find_coins(a,i+1,n,k) + find_coins(a,i,n,k-a[i]);
+    return dp[i][k];
 }
 
 int main(){
@@ -19,6 +22,7 @@ int main(){
         int n;
         cin >> n;
         int a[n];
+        memset(dp,0,sizeof(dp));
         for(int i=0;i<n;i++)
             cin >> a[i];
         int k;
