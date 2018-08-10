@@ -36,10 +36,24 @@ void modexp(int a,int n,int m){
 	cout << "Modular Exponentiation: " << ans << "\n";
 }
 
+// EUCLID's Theorem for finding GCD of two numbers
+void gcd(int a,int b){
+	if(a<b)
+		swap(a,b);
+	while(b>0){
+		a = a%b;
+		swap(a,b);
+	}
+	cout << "GCD: " << a << "\n";
+}
+
 int main(){
 	int a,n,m;
 	cin >> a >> n >> m;
 	exponentiation(a,n);
 	modexp(a,n,m);
+	int p,q;
+	cin >> p >> q;
+	gcd(p,q);
 	return 0;
 }
