@@ -29,6 +29,27 @@ void better_prime(int n){
 	else cout << "Not Prime\n";
 }
 
+// Seive of Eratosthenes
+void seive(int n){
+	bool flag[n+1];
+	memset(flag,1,sizeof(flag));
+	flag[0] = flag[1] = 0; 
+	for(int i=3;i*i<=n;i+=2){
+		if(flag[i]==1){
+			for(int j=i*i;j<=n;j+=2*i){
+				if(flag[j])
+					flag[j] = 0; 
+			}
+		}
+	}
+	cout << 2 << " ";
+	for(int i=3;i<n;i+=2){
+		if(flag[i])
+			cout << i << " ";
+	}
+	cout << "\n";
+}
+
 int main(){
 	int t;
 	cin >> t;
@@ -37,5 +58,6 @@ int main(){
 		cin >> n;
 		naive_prime(n);
 		better_prime(n);
+		seive(n);
 	}
 }
