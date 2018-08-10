@@ -50,6 +50,17 @@ void seive(int n){
 	cout << "\n";
 }
 
+void factorise(int n){
+	for(int j=2;j*j<=n;j++){
+		while(n%j==0){
+			cout << j << " ";
+			n /=j;
+		}
+	}
+	if(n>1)
+		cout << n << "\n";
+}
+
 int main(){
 	int t;
 	cin >> t;
@@ -59,5 +70,6 @@ int main(){
 		naive_prime(n);
 		better_prime(n);
 		seive(n);
+		factorise(n);
 	}
 }
