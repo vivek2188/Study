@@ -23,9 +23,23 @@ void exponentiation(int a,int n){
 	cout << "Exponentiation: " << ans << "\n";
 }
 
+// MODULAR EXPONENTIATION
+void modexp(int a,int n,int m){
+	int ans = 1;
+	a = a%m;
+	while(n>0){
+		if(n&1)
+			ans = (ans*a)%m;
+		a = (a*a)%m;
+		n = (n>>1);
+	}
+	cout << "Modular Exponentiation: " << ans << "\n";
+}
+
 int main(){
-	int a,n;
-	cin >> a >> n;
+	int a,n,m;
+	cin >> a >> n >> m;
 	exponentiation(a,n);
+	modexp(a,n,m);
 	return 0;
 }
