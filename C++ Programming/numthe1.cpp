@@ -47,6 +47,26 @@ void gcd(int a,int b){
 	cout << "GCD: " << a << "\n";
 }
 
+// Extended Euclid's theorem
+/*
+	If a,b are coprime:
+		x = Modular Multiplicative Inverse of a under modulo b
+		y = Modular Multiplicative Inverse of b under modulo a
+*/
+void gcd_extended(int a,int b,int &x,int &y,int &_gcd){
+	if(b==0){
+		x = 1;
+		y = 0;
+		_gcd = a;
+	}
+	else{
+		gcd_extended(b,a%b,x,y,_gcd);
+		int temp = x;
+		x = y;
+		y = temp - y * (a/b);
+	}
+}
+
 int main(){
 	int a,n,m;
 	cin >> a >> n >> m;
@@ -55,5 +75,8 @@ int main(){
 	int p,q;
 	cin >> p >> q;
 	gcd(p,q);
+	int _gcd,x,y;
+	gcd_extended(p,q,x,y,_gcd);
+	cout << "Extended Euclidean: " << _gcd << " " << x << " " << y << "\n";
 	return 0;
 }
