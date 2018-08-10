@@ -50,6 +50,7 @@ void seive(int n){
 	cout << "\n";
 }
 
+// O(sqrt(n)) Time Complexity
 void factorise(int n){
 	for(int j=2;j*j<=n;j++){
 		while(n%j==0){
@@ -58,7 +59,31 @@ void factorise(int n){
 		}
 	}
 	if(n>1)
-		cout << n << "\n";
+		cout << n;
+	cout << "\n";
+}
+
+// O(log(n)) Time Complexity
+void factorise_eff(int n){
+	int minprime[n+1];
+	memset(minprime,0,sizeof(minprime));
+	for(int i=2;i*i<=n;i++){
+		if(minprime[i]==0){
+			for(int j=i*i;j<=n;j+=i){
+				if(minprime[j]==0)
+					minprime[j] = i;
+			}
+		}
+	}
+	minprime[1] = 1;
+	for(int i=2;i<=n;i++)
+		if(minprime[i]==0)
+			minprime[i] = i;
+	while(n>1){
+		cout << minprime[n] << " ";
+		n /= minprime[n];
+	}
+	cout << "\n";
 }
 
 int main(){
@@ -71,5 +96,6 @@ int main(){
 		better_prime(n);
 		seive(n);
 		factorise(n);
+		factorise_eff(n);
 	}
 }
