@@ -52,6 +52,8 @@ void gcd(int a,int b){
 	If a,b are coprime:
 		x = Modular Multiplicative Inverse of a under modulo b
 		y = Modular Multiplicative Inverse of b under modulo a
+		
+	MMI = (x%m + m) %m
 */
 void gcd_extended(int a,int b,int &x,int &y,int &_gcd){
 	if(b==0){
@@ -66,6 +68,15 @@ void gcd_extended(int a,int b,int &x,int &y,int &_gcd){
 		y = temp - y * (a/b);
 	}
 }
+
+// Fermat's Little Theorem
+/*
+	DEFINE Modular Multiplicative Inverse MMI :P
+	If m is prime:
+		then MMI of a under m = a^(m-2) %m;
+	FERMAT's Theorem:
+		a^(m-1) % m = 1 if m is prime for all a>0
+*/
 
 int main(){
 	int a,n,m;
