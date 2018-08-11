@@ -30,6 +30,15 @@ void better_prime(int n){
 }
 
 // Seive of Eratosthenes
+/*
+    For finding the prime number we can also use Fermat's little theorem:
+        According to Fermat's theorem : 
+            If 'p' is a prime number then for all number in the range (0,p) say a,
+                REMEMBER - It is an open interval.
+                a^(p-1) % p = 1
+            Otherwise
+                'p' is composite number.
+*/
 void seive(int n){
 	bool flag[n+1];
 	memset(flag,1,sizeof(flag));
