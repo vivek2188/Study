@@ -59,6 +59,43 @@ void seive(int n){
 	cout << "\n";
 }
 
+/*
+	Miller Rabin Primality Testing 
+	For a number 'n' It's time complexity is O(log(n))
+	Whereas for finding the prime number upto n the time complexity of SEIVE is O(n*log(n)*log(log(n)))
+	Miller Rabin is way better than seive when time complexity is taken into consideration
+*/
+void miller_rabin_prime(int n){
+	if(n%2==0){
+		cout << "Not Prime\n";
+		return;
+	}
+	int t = 0;
+	int d = n-1;
+	while(d%2==0){
+		t++;
+		d /=2;
+	}
+	for(int k=2;k<n-1;k++){
+		int x = int(pow(k,d))% n;
+		if(x==1 or x==n-1)
+			continue;
+		for(int r=1;r<=t-1;r++){
+			x = (x*x) % n;
+			if(x==1){
+				cout << "Not Prime\n";
+				return;
+			}
+			if(x==n-1)
+				continue;
+		}
+		
+		cout << "Not Prime\n";
+		return;
+	}
+	cout << "Prime\n";
+}
+
 // O(sqrt(n)) Time Complexity
 void factorise(int n){
 	for(int j=2;j*j<=n;j++){
@@ -94,7 +131,7 @@ void factorise_eff(int n){
 	}
 	cout << "\n";
 }
-
+ 
 int main(){
 	int t;
 	cin >> t;
@@ -103,7 +140,8 @@ int main(){
 		cin >> n;
 		naive_prime(n);
 		better_prime(n);
-		seive(n);
+        seive(n);
+		miller_rabin_prime(n);
 		factorise(n);
 		factorise_eff(n);
 	}
