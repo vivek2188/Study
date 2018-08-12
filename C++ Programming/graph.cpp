@@ -28,16 +28,29 @@ void bfs(int s,vector<int> adj[],bool vis[]){
     }
 }
 
+bool dfs_cycle(int,list<int>*,int[]);
 bool Graph :: isCyclic(){
-    int parent[V];
+    int vis[V];
     for(int i=0;i<V;i++)
-        parent[i] = -1;
-    for(int i=0;i<V;i++){
-        for(int j=0;j<adj[V].size();j++){
-            if(parent[j]!=-1)
-                parent[j] = i;
-            else return 1;
-        }
+        vis[i] = 0;
+    bool flag = 0;
+    list<int>* g = adj;
+    for(int i=0;i<V and !flag;i++){
+        if(vis[i]==0)
+            flag = dfs_cycle(i,g,vis);
     }
-    return 0;
+    return flag;
+}
+
+bool dfs_cycle(int s,list<int>*g,int vis[]){
+    vis[s] = 1;
+    bool flag = 0;
+    for(auto i=g[s].begin();i!=g[s].end() and !flag;i++){
+        if(vis[*i]==0)
+            flag = (flag|dfs_cycle(*i,g,vis));
+        else if(vis[*i]==1)
+            return 1;
+    }
+    vis[s] = 2;
+    return flag;
 }
