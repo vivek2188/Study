@@ -36,3 +36,7 @@ Similarly, we can also have Complete Bipartite Graph denoted by K(m,n)
 Complement Gc of a simple graph G is the simple graph with the vertex set V, two vertices are adjacent in Gc if they are not agjacent in G.
 If G and Gc are isomorphic then they are self complementary.
 
+INCIDENCE AND ADJACENCY MATRICES
+To any graph G incidence matrix corresponds to v*e matrix, where every element M[i,j] means number of times(0,1,2{LOOP}) i(Vertex) and j(Edge) are incident.
+And adjacency matrix corresponds to v*v matrix, where every element M[i,j] means number of edges from i to j.
+For representing a graph adjacency matrix is preferred over incidence matrix because of its smaller size.
