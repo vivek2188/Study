@@ -22,3 +22,17 @@ Simple Graph - Have no loops and no two of its link join same pair of vertices.
 
 v = #Vertices , epsilon = #Edges
 A simple graph G can have atmost vC2 number of edges.
+
+GRAPH ISOMORPHISM
+Two graphs are G and H are identical if V(G) = V(H), E(G) = E(H) and psiG = psiH.
+Two graphs are said to be isomorphic if there are bijections such that
+ p: V(G) -> V(H) and q: E(G) -> E(H) such that psi(e) = uv if and only if psi(q(e)) = p(u)*q(v)
+
+Complete Graph - Each pair of distinct vertices is joined by an edge is denoted by K.
+Empty Graph - Has no edge.
+Bipartite Graph - Vertex set can be partitioned into two subsets X and Y, so that each end has one end in X and other in Y.
+Similarly, we can also have Complete Bipartite Graph denoted by K(m,n)
+
+Complement Gc of a simple graph G is the simple graph with the vertex set V, two vertices are adjacent in Gc if they are not agjacent in G.
+If G and Gc are isomorphic then they are self complementary.
+
