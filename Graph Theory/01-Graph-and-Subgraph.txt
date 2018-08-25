@@ -1,0 +1,24 @@
+Book: GRAPH THEORY WITH APPLICATIONS by J. A. Bondy and U. S. R. Murty 
+
+Chapter 1 - Graph and Subgraph
+
+Graph G is defined as an ordered triple (V,E,psi) where
+ - V is a set of non empty set of vertices
+ - E is a set, disjoint from V, of edges
+ - psi is an incidence function that associates with each edge of an unordered pair of(not necessarily distinct) vertices of G
+
+It merely depicts the incidence relation holding between its vertices and edges.
+
+Planar Graph is a graph whose edges intersects only at their ends otherwise Non-Planar.
+
+Adjacent Edges - Two edges which are incident with a common vertex.
+Adjacent Vertices - Two vertices which are incident with a common edge.
+
+An edge with identical ends is a Loop otherwise Link
+
+Finite Graph - Have finite set of vertices and edges.
+Trivial Graph  - Have only one vertex.
+Simple Graph - Have no loops and no two of its link join same pair of vertices.
+
+v = #Vertices , epsilon = #Edges
+A simple graph G can have atmost vC2 number of edges.
