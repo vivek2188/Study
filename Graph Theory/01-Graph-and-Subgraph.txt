@@ -40,3 +40,14 @@ INCIDENCE AND ADJACENCY MATRICES
 To any graph G incidence matrix corresponds to v*e matrix, where every element M[i,j] means number of times(0,1,2{LOOP}) i(Vertex) and j(Edge) are incident.
 And adjacency matrix corresponds to v*v matrix, where every element M[i,j] means number of edges from i to j.
 For representing a graph adjacency matrix is preferred over incidence matrix because of its smaller size.
+
+SUBGRAPH
+A graph H is said to be a subgraph of G if V(H) is a subset of V(G) and E(H) is also a subset of E(G).
+If H!=G then it is said to be a Proper Subgraph of G.
+A spanning subgraph of G is a subgraph H with V(H) = V(G).
+A simple spanning subgraph of G or underlying subgraph of G is a spanning subgraph without any loop and for every pair of distinct vertices there is only one link.
+
+If V' is non empty subset of V, then a subgraph with V' as its vertices and the edge set consisting of all edges which have both of its ends in V' is termed as Induced Subgraph of G.
+
+If E' is non empty subset of E, then a subgraph with E' as its edge set and the vertices are those with edges as E' is termed as Edge Induced Subgraph of G.
+Disjoint Subgraphs G1, G2 have no vertices and edges in common.
