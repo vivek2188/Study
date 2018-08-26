@@ -51,3 +51,15 @@ If V' is non empty subset of V, then a subgraph with V' as its vertices and the 
 
 If E' is non empty subset of E, then a subgraph with E' as its edge set and the vertices are those with edges as E' is termed as Edge Induced Subgraph of G.
 Disjoint Subgraphs G1, G2 have no vertices and edges in common.
+
+Vertex Degrees
+Convention - 
+ Minimum degree: Small delta
+ Maximum degree: Big delta
+Sum of degrees of all the nodes: 2*epsilon{EVEN}
+#Vertices with odd degree: Odd
+By PigeonHole Principle: There are always two vertices with exactly same degree(given vertices>=2).
+
+HAKIMI's theorem 
+REQUIREMENT:
+ Convert the degree sequence in decreasing order.
