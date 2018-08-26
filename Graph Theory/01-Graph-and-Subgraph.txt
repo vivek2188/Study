@@ -77,5 +77,6 @@ Connected Components - If V can be divided into non empty subsets V1,V2,V3,... s
 Number of connected components - Small omega.
 
 A graph is bipartite if and only if it contains no odd cycle[PROOF]
+If delta(G)>=2, then G contains a cycle.[PROOF] interesting.
 
 Shortest Path Problem - Dijkstra Algorithm
