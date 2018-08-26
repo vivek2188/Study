@@ -75,3 +75,7 @@ Path - In addition if a trail of all distinct vertices(not necessarily last one)
 Two vertices are connected if there is a path <u-v> in G.
 Connected Components - If V can be divided into non empty subsets V1,V2,V3,... such that two vertices are connected if they belong to same set. 
 Number of connected components - Small omega.
+
+A graph is bipartite if and only if it contains no odd cycle[PROOF]
+
+Shortest Path Problem - Dijkstra Algorithm
