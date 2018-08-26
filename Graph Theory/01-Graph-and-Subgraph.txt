@@ -63,3 +63,15 @@ By PigeonHole Principle: There are always two vertices with exactly same degree(
 HAKIMI's theorem 
 REQUIREMENT:
  Convert the degree sequence in decreasing order.
+
+A graph is K-regular if all the vertices have same degree K. Similarly, K-regular bipartite graph.
+
+PATH AND CONNECTION
+Walk - Finite non null sequence of vertices and edges.
+       W = v0e1v1e2v2e3v3....ekvk
+Trail - It is a walk with all distinct edges.
+Path - In addition if a trail of all distinct vertices(not necessarily last one). Closed path - Last one also same.
+
+Two vertices are connected if there is a path <u-v> in G.
+Connected Components - If V can be divided into non empty subsets V1,V2,V3,... such that two vertices are connected if they belong to same set. 
+Number of connected components - Small omega.
