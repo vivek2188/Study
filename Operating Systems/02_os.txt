@@ -55,3 +55,32 @@ For example - When we write a normal C code for printing the "Hello World" onto 
 
 Why use API rather than system calls?
  - Because for calling the system we would have to switch to kernel mode and it only makes the things complicated. So, we leave that for the API to handle.
+
+System Call Implementation
+A number is associated with each system call
+ - System call interface maintains a table indexed according to these numbers
+The system call interface invokes intended system call in OS kernel and returns status of the system call and any return values.
+The caller need know nothing about how the system call is implementated
+ - Just needs to obey API and understand understand what os will do as a result call
+ - Most details of OS interface hidden from programmer by API
+ 	- Managed by run-time support library(set of functions built into libraries included with compiler)
+
+System Call Parameter Passing
+ - Often, more information is required than the identity of the desired system call
+	- Exact type and amount of the information vary according to OS and call
+ - Three general methods used to pass parameters to the OS
+     1. Simplest: Pass the parameters in registers
+          - In some cases, may be more parameters than registers
+     2. Parameters stored in block, or table, in memory, and address of the block as a parameter in a register
+     3. Parameters placed, or pushed, onto the stack by the program and popped off the stack by the operating system.
+
+  Last two methods do not limit the number or length of parameters being passed.
+
+Types of System Call
+ - Process Control 
+ - File Management 
+ - Device Management
+ - Device Management
+ - Information Maintenanace
+ - Communications
+ - Protection
