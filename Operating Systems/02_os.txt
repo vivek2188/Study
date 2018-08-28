@@ -76,11 +76,21 @@ System Call Parameter Passing
 
   Last two methods do not limit the number or length of parameters being passed.
 
-Types of System Call
- - Process Control 
- - File Management 
- - Device Management
- - Device Management
- - Information Maintenanace
- - Communications
- - Protection
+Types of System Call              UNIX System Call
+ - Process Control		: fork(), wait(), exit()
+ - File Management 		: open(), read(), write(), close()
+ - Device Management		: local(), read(), write() 
+ - Information Maintenanace	: getpid(), alarm(), sleep() 
+ - Communications		: pipe(),...
+ - Protection			: chmod(),...
+
+System Programs
+ - System Progras provide a convenient environment for program development and execution. They can be divided into:
+	1. File Manipulation - create, delete, copy, rename, print, list,...
+	2. Status Information - date, time, amount of available memory, disk space, whi is logged on,...
+	3. File Modification - text editors, grep,...
+	4. Programming Language Support - compiler, debuggers,..
+	5. Program loading and execution - loaders, linkers
+	6. Commuinications - ftp, browsers, ssh
+	7. Games, puzzles etc.
+
