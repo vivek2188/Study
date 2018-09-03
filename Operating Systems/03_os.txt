@@ -35,4 +35,4 @@ Process State:
  - ready     : The process is waiting to be assigned to a processor
  - terminated: The process has finished execution
 
-In a single CPU system, only one process may be in runnig state; many processes may be in ready and waiting states.
+In a single CPU system, only one process may be in running state; many processes may be in ready and waiting states.
