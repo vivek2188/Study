@@ -94,3 +94,12 @@ System Programs
 	6. Commuinications - ftp, browsers, ssh
 	7. Games, puzzles etc.
 
+Operating System Structure
+ - Simple Structure - Monolithic
+ - Layered Approach
+ - Microkernels
+ - Modules
+ - Hybrid Systems
+	- MacOS X
+	- iOS
+	- Android
