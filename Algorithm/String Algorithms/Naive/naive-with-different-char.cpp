@@ -1,3 +1,9 @@
+/*
+ Suppose that all characters in the pattern P are different. Show how to 
+ accelerate naive string matching algorithm to run in O(n) on an 
+ n-character text T.
+*/
+
 #include <iostream>
 #include <string>
 using namespace std;
