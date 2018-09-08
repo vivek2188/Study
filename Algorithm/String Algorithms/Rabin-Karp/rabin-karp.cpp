@@ -22,6 +22,7 @@ void rabin_karp_string_matcher(string T,string P,int q){
 	}
 	//Algorithm
 	int h = pow(d,m-1);	// h = d^(m-1)
+	int spurious_hits = 0;
 	int compute[n-m+1];
 	compute[0] = t;
 	for(int s=0;s<=n-m;s++){
@@ -31,6 +32,7 @@ void rabin_karp_string_matcher(string T,string P,int q){
 				i++;
 			if(i==m+1)
 				cout << "Pattern occurs with shift " << s << "\n";
+			else spurious_hits++;
 		}
 		if(s<n-m){
 			t = (d * (t - (T[s+1]-'0')*h) + T[s+m+1]-'0') % q;
@@ -42,6 +44,7 @@ void rabin_karp_string_matcher(string T,string P,int q){
 	for(int i=0;i<=n-m;i++)
 		cout << compute[i] << " ";
 	cout << "\n";
+	cout << "Number of spurious hits: " << spurious_hits << "\n";
 }
 
 int main(){
