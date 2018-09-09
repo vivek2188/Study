@@ -16,10 +16,11 @@ class RabinKarp2D{
 	vector<long long int>factors;
 
 	public:
-		RabinKarp2D(vector<string>pattern){
+		RabinKarp2D(vector<string>pattern,long long int prime){
 			P = pattern;
 			h = pattern.size();
 			w = pattern[0].size();
+			q = prime;
 			int factor_size = (h-1) + (w-1) + 1;
 			factors.push_back(1);
 			long long int last = 1;
@@ -91,10 +92,56 @@ class RabinKarp2D{
 			cout << "Pattern does not exist";
 		}
 		
-			
+		/* Given the hash of the block at i,j returns the hash at i, j+1. */
+		long long int shiftRight(long long int hash,vector<string>text,int i,int j){
+			long long int sub = 0;
+			int l = i;
+			for(int k=factors.size()-1;k>=(w-1);k--)
+				sub = (sub + factors[k] * int(text[l++][j])) % q;
+			long long int add = 0;
+			for(int k=0;k<h;k++)
+				add = (d * add + int(text[i][j+k+w])) % q;
+			hash = (d * (hash - sub) + add) % q;
+			return hash;
+		}
+
+		/* Given the hash of the block at i,j return the hash at i+1,j*/
+		long long int shiftDown(long long int hash,vector<string> text,int i){
+			if(i==text.size()-h)
+				return -1;
+			long long int add = 0;
+			for(int k=0;k<w;k++)
+				add = (d * add + int(text[i+h][k])) % q;
+			long long int sub;
+			for(int k=0;k<w;k++)
+				sub = (d * sub + int(text[i][k])) % q;
+			int l = 1;
+			while(l<=(h-1))
+				sub = (sub * d) % q;
+			hash = (d * (hash - sub) + add) % q;
+			return hash;
+		}
 };
 
 int main(){
-	
+	vector<string> text, pattern;
+	cout << "Strings in text and pattern: ";
+	int n, m;
+	cin >> n >> m;
+	cout << "Enter text\n";
+	while(n--){
+		string s;
+		cin >> s;
+		text.push_back(s);
+	}
+	cout << "Enter pattern\n";
+	while(m--){
+		string s;
+		cin >> s;
+		pattern.push_back(s);
+	}
+	int prime = pow(10,9)+7;
+	//cin >> prime;
+	RabinKarp2D obj(pattern,prime);
 	return 0;
 }
