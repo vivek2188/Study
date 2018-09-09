@@ -30,6 +30,7 @@ class RabinKarp2D{
 				last = f;
 			}
 			patternHash = hash(pattern);
+			cout << "Pattern Hash: " << patternHash << "\n";
 		}
 
 		/*Computes (from scratch) and returns the hash of the 	
@@ -73,7 +74,6 @@ class RabinKarp2D{
 		void search(vector<string>text){
 			long long int rowStartHash = hash(text);
 			long long int hash = rowStartHash;
-			vector<int>ans;
 			for(int i=0;i<=text.size()-h;i++){
 				if(hash==patternHash and check(text,i,0)){
 						cout << "Pattern occurs at " << i << " "  << 0 << "\n";
@@ -97,11 +97,13 @@ class RabinKarp2D{
 			long long int sub = 0;
 			int l = i;
 			for(int k=factors.size()-1;k>=(w-1);k--)
-				sub = (sub + factors[k] * int(text[l++][j])) % q;
+				sub = (sub + factors[k] * int(text[l++][j])) ;
 			long long int add = 0;
 			for(int k=0;k<h;k++)
-				add = (d * add + int(text[i][j+k+w])) % q;
+				add = (d * add + int(text[i+k][j+w])) % q;
 			hash = (d * (hash - sub) + add) % q;
+			if(hash<0)
+				hash += q;
 			return hash;
 		}
 
@@ -112,13 +114,15 @@ class RabinKarp2D{
 			long long int add = 0;
 			for(int k=0;k<w;k++)
 				add = (d * add + int(text[i+h][k])) % q;
-			long long int sub;
+			long long int sub = 0;
 			for(int k=0;k<w;k++)
 				sub = (d * sub + int(text[i][k])) % q;
 			int l = 1;
-			while(l<=(h-1))
+			while(l++<=(h-1))
 				sub = (sub * d) % q;
 			hash = (d * (hash - sub) + add) % q;
+			if(hash<0)
+				hash += q;
 			return hash;
 		}
 };
@@ -143,5 +147,6 @@ int main(){
 	int prime = pow(10,9)+7;
 	//cin >> prime;
 	RabinKarp2D obj(pattern,prime);
+	obj.search(text);
 	return 0;
 }
