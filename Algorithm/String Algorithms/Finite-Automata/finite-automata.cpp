@@ -80,3 +80,15 @@ int main(){
 	finite_automata_matcher(text,transition,pattern.length(),alphabet_size);
 	return 0;
 }
+
+/*
+   TO DO
+	1. Given a pattern P containing gap characters, show how to
+           build a finite automaton that can find an occurrence
+           of P in a text T in O(n) matching time, where n = |T|.
+
+	2. Given two patterns P and P', describe how to construct a
+           finite automaton that determines all occurrences of either 
+           pattern. Try to minimize the number of states in your 
+           automaton.
+*/
