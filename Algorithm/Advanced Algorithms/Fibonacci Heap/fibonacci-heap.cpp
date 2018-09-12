@@ -35,12 +35,16 @@ Node* createnode(int key){
 
 class FibonacciHeap{
 	Node *head;
-	int nodes, marked_nodes;
+	int nodes, marked_nodes, num_trees;
 	public:
 		// Initializer
 		FibonacciHeap(){
 			head = NULL;
-			nodes = marked_nodes = 0;
+			nodes = marked_nodes = num_trees = 0;
+		}
+		void fib_heap_initializer(){
+			head = NULL;
+			nodes = marked_nodes = num_trees = 0;
 		}
 		// Pointer to the minimum node
 		Node* minimum(){
@@ -48,7 +52,7 @@ class FibonacciHeap{
 		}
 		// Potential Calculator
 		void potential_function(){
-			cout << nodes + 2 * marked_nodes << "\n";
+			cout << num_trees + 2 * marked_nodes << "\n";
 		}
 		// Insertion
 		void fib_heap_insert(int key){
@@ -170,8 +174,10 @@ class FibonacciHeap{
 				w = r;
 			}while(mp.find(w)==mp.end());
 			head = NULL;
+			num_trees = 0;
 			for(int i=0;i<=max_deg;i++){
 				if(A[i]!=NULL){
+					num_trees++;
 					if(head==NULL)
 						head = A[i];
 					else{
@@ -214,29 +220,67 @@ class FibonacciHeap{
 };
 
 int main(){
-	FibonacciHeap obj;
-	Node *head = obj.minimum();
-	if(head==NULL)
-		cout << "Empty\n";
-	obj.fib_heap_insert(5);
-	obj.fib_heap_insert(2);
-	obj.fib_heap_insert(3);
-	obj.fib_heap_insert(1);
-	obj.fib_heap_insert(4);
-	obj.fib_heap_insert(6);
-	obj.fib_heap_extract_min();
-	obj.print_root_list();	
-	obj.fib_heap_extract_min();
-	obj.print_root_list();
-	obj.fib_heap_extract_min();
-	obj.print_root_list();
-	obj.fib_heap_extract_min();
-	obj.print_root_list();
-	obj.fib_heap_extract_min();
-	obj.print_root_list();
-	obj.fib_heap_extract_min();
-	obj.print_root_list();
-	obj.fib_heap_extract_min();
-	obj.print_root_list();
+	FibonacciHeap H,H1,H2,H3;
+	char c = 'y';
+	int i;
+	while(c=='y' || c=='Y'){
+	cout << "1 For INSERT\n2 For MINIMUM\n3 For EXTRACT-MIN\n4 For Union\n5 For Print Root List\n";
+	cin >> i;
+	Node *head, *deleted;
+	switch(i){
+		case 1:
+			int key;
+			cout << "Enter the value: ";
+			cin >> key;
+			H.fib_heap_insert(key);
+			break;
+		case 2:
+			head = H.minimum();
+			if(head!=NULL)
+				cout << "Value of head: " << head->key << "\n";
+			else cout << "Empty Fibonacci Heap\n";
+			break;
+		
+		case 3:
+			deleted = H.fib_heap_extract_min();
+			if(deleted!=NULL)
+				cout << "Extracted the minimum value: " << deleted->key << "\n";
+			break;
+		case 4:
+			H1.fib_heap_initializer();
+			H2.fib_heap_initializer();
+			H3.fib_heap_initializer();
+			cout << "Number of elements in heap 1: ";
+			int m,n;
+			cin >> m;
+			cout << "Enter the elements: ";
+			while(m--){
+				int k;
+				cin >> k;
+				H1.fib_heap_insert(k);
+			}
+			cout << "Root of the heap 1: " << H1.minimum()->key << "\n";
+			cout << "Number of elements in heap 2: ";
+			cin >> n;
+			cout << "Enter the elements: ";
+			while(n--){
+				int k;
+				cin >> k;
+				H2.fib_heap_insert(k);
+			}
+			cout << "Root of the heap 2: " << H2.minimum()->key << "\n";
+			cout << "Performing Union of the above 2 heaps.\n";
+			H3.fib_heap_union(H1,H2);
+			cout << "Root of the merged heap: " << H3.minimum()->key << "\n"; 
+			break;
+		case 5:
+			H.print_root_list();
+			break;
+		default:
+			cout << "Enter a valid number\n";
+	}
+	cout << "Want to continue?(Y/N) ";
+	cin >> c;
+	}
 	return 0;
 }
