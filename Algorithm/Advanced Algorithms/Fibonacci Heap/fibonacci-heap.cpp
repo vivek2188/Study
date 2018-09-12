@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
-#include <map>
+#include <unordered_map>
 using namespace std;
 
 //Node Structure
@@ -143,7 +143,7 @@ class FibonacciHeap{
 			for(int i=0;i<=max_deg;i++)
 				A[i] = NULL;
 			Node *w = head;
-			map<Node*,bool>mp;
+			unordered_map<Node*,bool>mp;
 			do{
 				Node *x = w;
 				Node *r = w->right;
