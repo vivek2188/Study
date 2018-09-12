@@ -98,6 +98,42 @@ class FibonacciHeap{
 			nodes = H1.nodes + H2.nodes;
 			return;
 		}
+		// Extract Min
+		Node* fib_heap_extract_min(){
+			Node *z = head;
+			if(z!=NULL){
+				// Adding its children to root list
+				Node *ch = z->child;
+				Node *ch_copy = ch;
+				do{
+					if(ch==NULL)
+						break;
+					Node *l1 = head->left;
+					l1->right = ch;
+					ch->left = l1;
+					Node *chc = ch->right;
+					ch->right = head;
+					head->left = ch;
+					ch = chc;
+				}while(ch!=ch_copy);
+				// Remove z from the root list
+				Node *l = z->left, *r = z->right;
+				l->right = r;
+				r->left = l;
+				if(z==z->right)
+					head = NULL;
+				else{
+					head = z->right;
+					consolidate();
+				}
+				nodes--;
+			}
+			if(z!=NULL){
+				z->child = NULL;
+				z->left = z->right = z;
+			}
+			return z;
+		}
 };
 
 int main(){
@@ -112,6 +148,7 @@ int main(){
 	obj.fib_heap_insert(4);
 	obj.fib_heap_insert(6);
 	head = obj.minimum();
+	obj.fib_heap_extract_min();
 	cout << head->key << "\n";
 	obj.print_root_list();
 	return 0;
