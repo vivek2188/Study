@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <algorithm>
+#include <map>
 using namespace std;
 
 //Node Structure
@@ -134,6 +136,73 @@ class FibonacciHeap{
 			}
 			return z;
 		}
+		// Consolidation of root list
+		void consolidate(){
+			int max_deg = floor(log2(nodes));
+			Node* A[max_deg+1];
+			for(int i=0;i<=max_deg;i++)
+				A[i] = NULL;
+			Node *w = head;
+			map<Node*,bool>mp;
+			do{
+				Node *x = w;
+				Node *r = w->right;
+				mp[w] = 1;
+				int d = x->degree;
+				while(A[d]!=NULL and d<=max_deg){
+					Node *y = A[d];
+					if(x->key>y->key)
+						swap(x,y);
+					fib_heap_link(y,x);
+					A[d] = NULL; 
+					d = d+1;
+				}
+				A[d] = x;
+				A[d]->left = A[d]->right = A[d];
+				w = r;
+			}while(mp.find(w)==mp.end());
+			head = NULL;
+			for(int i=0;i<=max_deg;i++){
+				if(A[i]!=NULL){
+					if(head==NULL)
+						head = A[i];
+					else{
+						Node *l1 = head->left;
+						Node *l2 = A[i]->left;
+						l1->right = A[i];
+						A[i]->left = l1;
+						l2->right = head;
+						head->left = l2;
+						// Head Updation
+						if(head->key > A[i]->key)
+							head = A[i];
+					}
+				}			
+			}
+		}
+		// Linking 
+		void fib_heap_link(Node *y,Node *x){
+			Node *l = y->left, *r = y->right;
+			l->right = r;
+			r->left = l;
+			x->degree++;
+			if(x->child==NULL){
+				x->child = y;
+				y->left = y->right = y;
+			}
+			else{
+				Node *r = x->child->right;
+				x->child->right = y;
+				y->left = x->child;
+				y->right = r;
+				r->left = y;
+			}
+			y->parent = x;
+			if(y->mark==true){
+				y->mark = false;
+				marked_nodes--;
+			}
+		}
 };
 
 int main(){
@@ -147,9 +216,9 @@ int main(){
 	obj.fib_heap_insert(1);
 	obj.fib_heap_insert(4);
 	obj.fib_heap_insert(6);
-	head = obj.minimum();
 	obj.fib_heap_extract_min();
-	cout << head->key << "\n";
+	head = obj.minimum();
+	//cout << head->key << "\n";
 	obj.print_root_list();
 	return 0;
 }
