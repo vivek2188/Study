@@ -128,6 +128,7 @@ class FibonacciHeap{
 					Node *chc = ch->right;
 					ch->right = head;
 					head->left = ch;
+					ch->parent = NULL;
 					ch = chc;
 				}while(ch!=ch_copy);
 				// Remove z from the root list
