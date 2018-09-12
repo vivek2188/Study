@@ -31,8 +31,11 @@ Node* createnode(int key){
  is a collection of unordered binomial trees. The largest tree that 
  can exist in such a collection contains n nodes. The largest possible 
  degree is therefore log n.
-*/
 
+TODO: 
+	1. Decrease Key
+	2. Delete 
+*/
 class FibonacciHeap{
 	Node *head;
 	int nodes, marked_nodes, num_trees;
