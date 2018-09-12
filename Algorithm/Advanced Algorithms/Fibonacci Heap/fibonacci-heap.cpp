@@ -71,6 +71,10 @@ class FibonacciHeap{
 		}
 		// Print root list
 		void print_root_list(){
+			if(head==NULL){
+				cout << "Empty fibonacci heap\n";
+				return;
+			}
 			Node *h = head;
 			cout << "Root list: ";
 			do{
@@ -102,6 +106,10 @@ class FibonacciHeap{
 		}
 		// Extract Min
 		Node* fib_heap_extract_min(){
+			if(head==NULL){
+				cout << "Error: Empty fibonacci heap\n";
+				return NULL;
+			}
 			Node *z = head;
 			if(z!=NULL){
 				// Adding its children to root list
@@ -217,8 +225,18 @@ int main(){
 	obj.fib_heap_insert(4);
 	obj.fib_heap_insert(6);
 	obj.fib_heap_extract_min();
-	head = obj.minimum();
-	//cout << head->key << "\n";
+	obj.print_root_list();	
+	obj.fib_heap_extract_min();
+	obj.print_root_list();
+	obj.fib_heap_extract_min();
+	obj.print_root_list();
+	obj.fib_heap_extract_min();
+	obj.print_root_list();
+	obj.fib_heap_extract_min();
+	obj.print_root_list();
+	obj.fib_heap_extract_min();
+	obj.print_root_list();
+	obj.fib_heap_extract_min();
 	obj.print_root_list();
 	return 0;
 }
