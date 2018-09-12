@@ -23,6 +23,14 @@ Node* createnode(int key){
 	return newnode;
 }
 
+/*
+ The maximum degree of any node in an n-node binomial tree is lg n. A
+ Fibonacci heap which supports only the mergeable heap operations 
+ is a collection of unordered binomial trees. The largest tree that 
+ can exist in such a collection contains n nodes. The largest possible 
+ degree is therefore log n.
+*/
+
 int main(){
 	
 	return 0;
