@@ -31,7 +31,29 @@ Node* createnode(int key){
  degree is therefore log n.
 */
 
+class FibonacciHeap{
+	Node *head;
+	int nodes, marked_nodes;
+	public:
+		// Initializer
+		FibonacciHeap(){
+			head = NULL;
+			nodes = marked_nodes = 0;
+		}
+		// Pointer to the minimum node
+		Node* minimum(){
+			return head;
+		}
+		// Potential Calculator
+		void potential_function(){
+			return nodes + 2 * marked_nodes;
+		}
+};
+
 int main(){
-	
+	FibonacciHeap obj;
+	Node *head = obj.minimum();
+	if(head==NULL)
+		cout << "Empty\n";
 	return 0;
 }
