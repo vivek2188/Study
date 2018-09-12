@@ -77,6 +77,27 @@ class FibonacciHeap{
 			}while(h!=head);
 			cout << "\n";
 		}
+		// Union of two fibonacci heaps
+		void fib_heap_union(FibonacciHeap H1,FibonacciHeap H2){
+			Node *h1 = H1.head, *h2 = H2.head;
+			if(h1==NULL || h2==NULL){
+				(h1==NULL)?(head=h2):(head=h1);
+			}
+			else{
+				Node *l1 = h1->left;
+				Node *l2 = h2->left;
+				l1->right = h2;
+				h2->left = l1;
+				l2->right = h1;
+				h1->left = l2;
+				// Head Updation
+				if(h1->key > h2->key)
+					head = h2;
+				else head = h1;
+			}
+			nodes = H1.nodes + H2.nodes;
+			return;
+		}
 };
 
 int main(){
