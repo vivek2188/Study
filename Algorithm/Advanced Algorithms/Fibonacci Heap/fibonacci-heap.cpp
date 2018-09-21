@@ -33,8 +33,7 @@ Node* createnode(int key){
  degree is therefore log n.
 
 TODO: 
-	1. Decrease Key
-	2. Delete 
+	1. Delete 
 */
 class FibonacciHeap{
 	Node *head;
