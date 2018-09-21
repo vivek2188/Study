@@ -221,7 +221,7 @@ class FibonacciHeap{
 				marked_nodes--;
 			}
 		}
-		// Cut
+		// Helper Function: Cut
 		void cut(Node *x,Node *y){
 			// Remove node from the child list
 			Node *child = y->child;
@@ -242,6 +242,20 @@ class FibonacciHeap{
 			x->left  = l;
 			x->right = head;
 			head->left = x;
+			x->parent = NULL;
+			x->mark = false;
+		}
+		// Helper Function: Cascading-Cut
+		void cascading_cut(Node *y){
+			Node *z = y->parent;
+			if(z!=NULL){
+				if(y->mark==false)
+					y->mark = true;
+				else{
+					cut(y,z);
+					cascading_cut(z);
+				}
+			}
 		}
 		// Decrease Key
 		void fib_heap_decrease_key(Node *x,int k){
