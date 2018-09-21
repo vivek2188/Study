@@ -284,6 +284,16 @@ class FibonacciHeap{
 			if(x->key<head->key)
 				head = x;
 		}
+		// Delete
+		void fib_heap_delete(int x_key){
+			Node *x = fib_heap_search(x_key);
+			if(x==NULL){
+				cout << "Not found\n";
+				return;		
+			}
+			fib_heap_decrease_key(x_key,-1);
+			fib_heap_extract_min();
+		}
 };
 
 int main(){
