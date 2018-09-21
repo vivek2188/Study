@@ -236,7 +236,12 @@ class FibonacciHeap{
 					y->child = l;
 			}
 			y->degree--;
-			
+			// Adding x to the root list
+			Node *l = head->left;
+			l->right = x;
+			x->left  = l;
+			x->right = head;
+			head->left = x;
 		}
 		// Decrease Key
 		void fib_heap_decrease_key(Node *x,int k){
