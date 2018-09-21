@@ -221,6 +221,18 @@ class FibonacciHeap{
 				marked_nodes--;
 			}
 		}
+		// Decrease Key
+		void fib_heap_decrease_key(Node *x,int k){
+			if(x->key < k)
+				cout << "Error: New key greater than current key\n";
+			x->key = k;
+			if(x->parent!=NULL and x->key < x->parent->key){
+				cut(x,y);
+				cascading_cut(y);			
+			}
+			if(x->key<head->key)
+				head = x;
+		}
 };
 
 int main(){
