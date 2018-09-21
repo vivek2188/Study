@@ -39,6 +39,7 @@ TODO:
 class FibonacciHeap{
 	Node *head;
 	int nodes, marked_nodes, num_trees;
+	unordered_map<int,Node*>found;
 	public:
 		// Initializer
 		FibonacciHeap(){
@@ -57,9 +58,16 @@ class FibonacciHeap{
 		void potential_function(){
 			cout << num_trees + 2 * marked_nodes << "\n";
 		}
+		// Search for a node
+		Node* fib_heap_search(int key){
+			if(found.find(key)==found.end())
+				return NULL;
+			return found[key];
+		}
 		// Insertion
 		void fib_heap_insert(int key){
 			Node *x = createnode(key);
+			found[key] = x;
 			if(head==NULL)
 				head = x;
 			else{
@@ -118,6 +126,7 @@ class FibonacciHeap{
 				return NULL;
 			}
 			Node *z = head;
+			found.erase(head->key);
 			if(z!=NULL){
 				// Adding its children to root list
 				Node *ch = z->child;
@@ -186,16 +195,15 @@ class FibonacciHeap{
 						head = A[i];
 					else{
 						Node *l1 = head->left;
-						Node *l2 = A[i]->left;
 						l1->right = A[i];
 						A[i]->left = l1;
-						l2->right = head;
-						head->left = l2;
+						A[i]->right = head;
+						head->left = A[i];
 						// Head Updation
 						if(head->key > A[i]->key)
 							head = A[i];
 					}
-				}			
+				}		
 			}
 		}
 		// Linking 
@@ -258,11 +266,19 @@ class FibonacciHeap{
 			}
 		}
 		// Decrease Key
-		void fib_heap_decrease_key(Node *x,int k){
+		void fib_heap_decrease_key(int x_key,int k){
+			Node *x = fib_heap_search(x_key);
+			if(x==NULL){
+				cout << "Not found\n";
+				return;		
+			}
+			found.erase(head->key);
 			if(x->key < k)
 				cout << "Error: New key greater than current key\n";
+			Node *y = x->parent;
 			x->key = k;
-			if(x->parent!=NULL and x->key < x->parent->key){
+			found[k] = x;
+			if(x->parent!=NULL and x->key < y->key){
 				cut(x,y);
 				cascading_cut(y);			
 			}
@@ -276,7 +292,7 @@ int main(){
 	char c = 'y';
 	int i;
 	while(c=='y' || c=='Y'){
-	cout << "1 For INSERT\n2 For MINIMUM\n3 For EXTRACT-MIN\n4 For Union\n5 For Print Root List\n";
+	cout << "1 For INSERT\n2 For MINIMUM\n3 For EXTRACT-MIN\n4 For Union\n5 For Print Root List\n6 FOR DECREASE KEY\n";
 	cin >> i;
 	Node *head, *deleted;
 	switch(i){
@@ -327,6 +343,14 @@ int main(){
 			break;
 		case 5:
 			H.print_root_list();
+			break;
+		case 6:
+			int k,f;
+			cout << "New value: ";
+			cin >> k;
+			cout << "Find: ";
+			cin >> f;
+			H.fib_heap_decrease_key(f,k);
 			break;
 		default:
 			cout << "Enter a valid number\n";
