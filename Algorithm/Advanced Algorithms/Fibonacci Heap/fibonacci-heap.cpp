@@ -221,6 +221,22 @@ class FibonacciHeap{
 				marked_nodes--;
 			}
 		}
+		// Cut
+		void cut(Node *x,Node *y){
+			// Remove node from the child list
+			Node *child = y->child;
+			if(child->left==child and child->right==child)
+				y->child = NULL;
+			else{
+				Node *l = child->left;
+				Node *r = child->right;
+				l->right = r;
+				r->left  = l;
+				if(y->child==child)
+					y->child = l;
+			}
+			y->degree--;
+		}
 		// Decrease Key
 		void fib_heap_decrease_key(Node *x,int k){
 			if(x->key < k)
