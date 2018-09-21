@@ -31,9 +31,6 @@ Node* createnode(int key){
  is a collection of unordered binomial trees. The largest tree that 
  can exist in such a collection contains n nodes. The largest possible 
  degree is therefore log n.
-
-TODO: 
-	1. Delete 
 */
 class FibonacciHeap{
 	Node *head;
@@ -286,13 +283,19 @@ class FibonacciHeap{
 		}
 		// Delete
 		void fib_heap_delete(int x_key){
+			if(nodes==0){
+				cout << "Error: Empty Fibonacci Heap\n";
+				return;
+			}
 			Node *x = fib_heap_search(x_key);
 			if(x==NULL){
 				cout << "Not found\n";
-				return;		
+				return;	
 			}
 			fib_heap_decrease_key(x_key,-1);
 			fib_heap_extract_min();
+			cout << "Deleted: " << x_key << "\n";
+			nodes--;
 		}
 };
 
@@ -301,71 +304,76 @@ int main(){
 	char c = 'y';
 	int i;
 	while(c=='y' || c=='Y'){
-	cout << "1 For INSERT\n2 For MINIMUM\n3 For EXTRACT-MIN\n4 For Union\n5 For Print Root List\n6 FOR DECREASE KEY\n";
-	cin >> i;
-	Node *head, *deleted;
-	switch(i){
-		case 1:
-			int key;
-			cout << "Enter the value: ";
-			cin >> key;
-			H.fib_heap_insert(key);
-			break;
-		case 2:
-			head = H.minimum();
-			if(head!=NULL)
-				cout << "Value of head: " << head->key << "\n";
-			else cout << "Empty Fibonacci Heap\n";
-			break;
-		
-		case 3:
-			deleted = H.fib_heap_extract_min();
-			if(deleted!=NULL)
-				cout << "Extracted the minimum value: " << deleted->key << "\n";
-			break;
-		case 4:
-			H1.fib_heap_initializer();
-			H2.fib_heap_initializer();
-			H3.fib_heap_initializer();
-			cout << "Number of elements in heap 1: ";
-			int m,n;
-			cin >> m;
-			cout << "Enter the elements: ";
-			while(m--){
-				int k;
+		cout << "1 For INSERT\n2 For MINIMUM\n3 For EXTRACT-MIN\n4 For Union\n5 For Print Root List\n6 FOR DECREASE KEY\n7 FOR DELETE\n";
+		cin >> i;
+		Node *head, *deleted;
+		switch(i){
+			case 1:
+				int key;
+				cout << "Enter the value: ";
+				cin >> key;
+				H.fib_heap_insert(key);
+				break;
+			case 2:
+				head = H.minimum();
+				if(head!=NULL)
+					cout << "Value of head: " << head->key << "\n";
+				else cout << "Empty Fibonacci Heap\n";
+				break;
+			
+			case 3:
+				deleted = H.fib_heap_extract_min();
+				if(deleted!=NULL)
+					cout << "Extracted the minimum value: " << deleted->key << "\n";
+				break;
+			case 4:
+				H1.fib_heap_initializer();
+				H2.fib_heap_initializer();
+				H3.fib_heap_initializer();
+				cout << "Number of elements in heap 1: ";
+				int m,n;
+				cin >> m;
+				cout << "Enter the elements: ";
+				while(m--){
+					int k;
+					cin >> k;
+					H1.fib_heap_insert(k);
+				}
+				cout << "Root of the heap 1: " << H1.minimum()->key << "\n";
+				cout << "Number of elements in heap 2: ";
+				cin >> n;
+				cout << "Enter the elements: ";
+				while(n--){
+					int k;
+					cin >> k;
+					H2.fib_heap_insert(k);
+				}
+				cout << "Root of the heap 2: " << H2.minimum()->key << "\n";
+				cout << "Performing Union of the above 2 heaps.\n";
+				H3.fib_heap_union(H1,H2);
+				cout << "Root of the merged heap: " << H3.minimum()->key << "\n"; 
+				break;
+			case 5:
+				H.print_root_list();
+				break;
+			case 6:
+				int k,f;
+				cout << "New value: ";
 				cin >> k;
-				H1.fib_heap_insert(k);
-			}
-			cout << "Root of the heap 1: " << H1.minimum()->key << "\n";
-			cout << "Number of elements in heap 2: ";
-			cin >> n;
-			cout << "Enter the elements: ";
-			while(n--){
-				int k;
+				cout << "Find: ";
+				cin >> f;
+				H.fib_heap_decrease_key(f,k);
+				break;
+			case 7:
+				cout << "To be deleted: ";
 				cin >> k;
-				H2.fib_heap_insert(k);
-			}
-			cout << "Root of the heap 2: " << H2.minimum()->key << "\n";
-			cout << "Performing Union of the above 2 heaps.\n";
-			H3.fib_heap_union(H1,H2);
-			cout << "Root of the merged heap: " << H3.minimum()->key << "\n"; 
-			break;
-		case 5:
-			H.print_root_list();
-			break;
-		case 6:
-			int k,f;
-			cout << "New value: ";
-			cin >> k;
-			cout << "Find: ";
-			cin >> f;
-			H.fib_heap_decrease_key(f,k);
-			break;
-		default:
-			cout << "Enter a valid number\n";
-	}
-	cout << "Want to continue?(Y/N) ";
-	cin >> c;
+				H.fib_heap_delete(k);
+				break;
+			default:
+				cout << "Enter a valid number\n";
+		}
+		cout << "Want to continue?(Y/N) ";
+		cin >> c;
 	}
 	return 0;
 }
