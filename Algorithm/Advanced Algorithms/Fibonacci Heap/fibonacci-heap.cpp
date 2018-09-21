@@ -228,14 +228,15 @@ class FibonacciHeap{
 			if(child->left==child and child->right==child)
 				y->child = NULL;
 			else{
-				Node *l = child->left;
-				Node *r = child->right;
+				Node *l = x->left;
+				Node *r = x->right;
 				l->right = r;
 				r->left  = l;
-				if(y->child==child)
+				if(y->child==x)
 					y->child = l;
 			}
 			y->degree--;
+			
 		}
 		// Decrease Key
 		void fib_heap_decrease_key(Node *x,int k){
