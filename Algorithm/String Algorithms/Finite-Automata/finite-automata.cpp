@@ -82,7 +82,7 @@ int main(){
 }
 
 /*
-   TO DO
+   TODO
 	1. Given a pattern P containing gap characters, show how to
            build a finite automaton that can find an occurrence
            of P in a text T in O(n) matching time, where n = |T|.
