@@ -49,8 +49,10 @@ class Dijsktra{
 			while(e--){
 				int s,d,w;
 				cin >> s >> d >> w;
+				// For directed graph
 				adj[s].push_back(make_pair(d,w));
-				adj[d].push_back(make_pair(s,w));
+				// For undirected graph
+				//adj[d].push_back(make_pair(s,w));
 			}
 			head = NULL;
 			nodes = 0;
