@@ -32,9 +32,9 @@ Node* createnode(int key,int index){
 
 class Dijsktra{
 	Node *head;
-	int nodes,vertices,edges,src,marked_nodes;
+	int nodes,vertices,edges,src;
 	unordered_map<int,Node*>found;
-	vector<int>adj[MAX];
+	vector<pair<int,int> >adj[MAX];
 	public:
 		// Initializer
 		Dijsktra(){
@@ -47,9 +47,10 @@ class Dijsktra{
 			int e = edges;
 			cout << "Enter edges\n";
 			while(e--){
-				int s,d;
-				cin >> s >> d;
-				adj[s].push_back(d);
+				int s,d,w;
+				cin >> s >> d >> w;
+				adj[s].push_back(make_pair(d,w));
+				adj[d].push_back(make_pair(s,w));
 			}
 			head = NULL;
 			nodes = 0;
@@ -63,7 +64,7 @@ class Dijsktra{
 		// Insertion
 		void fib_heap_insert(int key,int index){
 			Node *x = createnode(key,index);
-			found[key] = x;
+			found[index] = x;
 			if(head==NULL)
 				head = x;
 			else{
@@ -99,7 +100,7 @@ class Dijsktra{
 				return NULL;
 			}
 			Node *z = head;
-			found.erase(head->key);
+			found.erase(head->index);
 			if(z!=NULL){
 				// Adding its children to root list
 				Node *ch = z->child;
@@ -197,7 +198,6 @@ class Dijsktra{
 			y->parent = x;
 			if(y->mark==true){
 				y->mark = false;
-				marked_nodes--;
 			}
 		}
 		// Helper Function: Cut
@@ -239,16 +239,8 @@ class Dijsktra{
 		// Decrease Key
 		void fib_heap_decrease_key(int x_key,int k){
 			Node *x = fib_heap_search(x_key);
-			if(x==NULL){
-				cout << "Not found\n";
-				return;		
-			}
-			found.erase(head->key);
-			if(x->key < k)
-				cout << "Error: New key greater than current key\n";
 			Node *y = x->parent;
 			x->key = k;
-			found[k] = x;
 			if(x->parent!=NULL and x->key < y->key){
 				cut(x,y);
 				cascading_cut(y);			
@@ -256,10 +248,29 @@ class Dijsktra{
 			if(x->key<head->key)
 				head = x;
 		}
+		// Perform Dijsktra
+		void shortest_path_length(){
+			while(nodes){
+				Node *z = fib_heap_extract_min();
+				cout << "Vertex: " << z->index << ", Shortest path length: " << z->key << "\n";
+				int indx = z->index;
+				for(int i=0;i<adj[indx].size();i++){
+					int d,w;
+					d = adj[indx][i].first;
+					w = adj[indx][i].second;
+					Node *x = fib_heap_search(d);
+					if(x!=NULL){
+						if(x->key > z->key + w)
+							fib_heap_decrease_key(d,z->key + w);
+					}
+				}
+			}	
+		}
 };
 
 int main(){
 	Dijsktra obj;
 	obj.create_heap();
+	obj.shortest_path_length();
 	return 0;
 }
