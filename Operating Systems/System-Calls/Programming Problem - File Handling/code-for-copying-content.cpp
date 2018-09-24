@@ -42,5 +42,20 @@ int main(){
 	else{
 		cout << "Output file does not exist\nProceeding...\n";
 	}
+	// Copying the contents
+	string data;
+	ifstream inputfile;
+	inputfile.open(input_filename);
+	ofstream outputfile;
+	outputfile.open(output_filename);
+	// Looping
+	while(getline(inputfile,data)){
+		outputfile << data << "\n";
+	}
+	outputfile << "End of this file.\n";
+	// Completed writing and reading
+	outputfile.close();	
+	inputfile.close();
+	cout << "Completed copying\n";
 	return 0;
 }
