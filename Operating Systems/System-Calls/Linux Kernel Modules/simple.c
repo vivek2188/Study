@@ -1,3 +1,4 @@
+// lsmod: List all kernel modules that are currently loaded.
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -19,3 +20,7 @@ void simple_exit(void){
 	printk(KERN_INFO "Removing Module\n");
 	// return type must be void
 }
+
+MODULE_LICENSE("GPL");
+MODULE_DESCRIPTION("Simple Module");
+MODULE_AUTHOR("SGG");
