@@ -14,3 +14,8 @@ int simple_init(void){
 		values are given in #include <linux/printk.h> file.
 		KERN_INFO: Informational Message
 */
+// Module exit point - Function is invoked when the module is removed from the kernel
+void simple_exit(void){
+	printk(KERN_INFO "Removing Module\n");
+	// return type must be void
+}
