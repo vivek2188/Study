@@ -1,0 +1,4 @@
+This is an input file.
+It serves the data to be copied to various other files.
+It is the utter failure in itself.
+I regret wasting my time over this stupid text.
