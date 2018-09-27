@@ -24,3 +24,12 @@ void simple_exit(void){
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Simple Module");
 MODULE_AUTHOR("SGG");
+
+/*
+	Helpful commands: 
+		1. Kernel modules are loaded using insmod command
+			sudo insmod simple.ko
+		2. Kernel modules are removed using rmmod command
+			sudo rmmod simple	// no need of .ko extension
+		3. You can check to the message it writes in the kernel log buffer by dmesg command
+*/
