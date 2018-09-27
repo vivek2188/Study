@@ -21,6 +21,10 @@ void simple_exit(void){
 	// return type must be void
 }
 
+// Macros for registering the module entry and exit point
+module_init(simple_init);
+module_exit(simple_exit);
+
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Simple Module");
 MODULE_AUTHOR("SGG");
