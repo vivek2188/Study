@@ -28,6 +28,11 @@ int simple_init(void){
 	INIT_LIST_HEAD(birthdayList.list);
 	// Memory allocation for a person's data
 	person = kmalloc(sizeof(*person),GFP_KERNEL);
+	// Initialising instances
+	person->day = 1;
+	person->month = 2;
+	person->year = 1990;
+	INIT_LIST_HEAD(&person->list);
 	return 0;	// 0 represents success and rest indicates failure
 }
 /*
