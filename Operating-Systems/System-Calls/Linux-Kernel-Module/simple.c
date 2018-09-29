@@ -6,27 +6,22 @@
 #include <linux/list.h>
 #include <linux/slab.h>
 
+// Refer to: https://github.com/torvalds/linux/blob/master/include/linux/list.h for getting more info. on circular list implementation.
+
+// Birthday structure
 struct birthday{
-	int day;
+	int day;	
 	int month;
 	int year;
-	struct list_head list;
+	struct list_head *list; // It's circular linked list and list_head is defined in #include <linux/types.h>
 };
 
-struct birthday birthdaylist;
+// List consisting all birthday data
+struct birthday birthdayList;
 
 // Module Entry Point - Function is invoked when the module is loaded into kernel
-int simple_init(void){	
-	struct birthday *person;
-	printk(KERN_INFO "Loading Module\n");
-	INIT_LIST_HEAD(&birthdaylist.list);
-
-	person = kmalloc(sizeof(person), GFP_KERNEL);
-	person->day = 1;
-	person->month = 1;
-	person->year = 1990;
-	INIT_LIST_HEAD(&person->list);
-
+int simple_init(void){
+	
 
 	return 0;	// 0 represents success and rest indicates failure
 }
