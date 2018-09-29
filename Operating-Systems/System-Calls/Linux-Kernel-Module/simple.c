@@ -21,8 +21,11 @@ struct birthday birthdayList;
 
 // Module Entry Point - Function is invoked when the module is loaded into kernel
 int simple_init(void){
-	
-
+	printk(KERN_INFO "Loading the module\n");
+	// Declaring the variables
+	struct birthday *person, *birthdayVar;
+	// Defining birthdayList
+	INIT_LIST_HEAD(birthdayList.list);
 	return 0;	// 0 represents success and rest indicates failure
 }
 /*
