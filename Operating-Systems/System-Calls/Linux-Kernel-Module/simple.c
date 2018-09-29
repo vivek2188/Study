@@ -35,6 +35,22 @@ int simple_init(void){
 	INIT_LIST_HEAD(&person->list);
 	// Appending to the birthdayList
 	list_add_tail(&person->list,birthdayList.list); // Parameters: new, head
+	// Adding few more data
+	int indx = 1;
+	int day,month,year;
+	day = 2;
+	month = 3;
+	year = 1991;
+	while(indx <= 4){
+		struct birthday *p;
+		p = kmalloc(sizeof(*p),GFP_KERNEL);
+		p->day = 1;
+		p->month = 2;
+		p->year = 1990;
+		INIT_LIST_HEAD(&p->list);
+		list_add_tail(&p->list,birthdayList.list);	
+		indx++;
+	}
 	return 0;	// 0 represents success and rest indicates failure
 }
 /*
