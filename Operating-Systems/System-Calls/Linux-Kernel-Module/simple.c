@@ -23,9 +23,11 @@ struct birthday birthdayList;
 int simple_init(void){
 	printk(KERN_INFO "Loading the module\n");
 	// Declaring the variables
-	struct birthday *person, *birthdayVar;
+	struct birthday *person;//, *birthdayVar;
 	// Defining birthdayList
 	INIT_LIST_HEAD(birthdayList.list);
+	// Memory allocation for a person's data
+	person = kmalloc(sizeof(*person),GFP_KERNEL);
 	return 0;	// 0 represents success and rest indicates failure
 }
 /*
