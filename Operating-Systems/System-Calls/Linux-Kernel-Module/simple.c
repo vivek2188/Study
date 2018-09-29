@@ -33,6 +33,8 @@ int simple_init(void){
 	person->month = 2;
 	person->year = 1990;
 	INIT_LIST_HEAD(&person->list);
+	// Appending to the birthdayList
+	list_add_tail(&person->list,birthdayList.list); // Parameters: new, head
 	return 0;	// 0 represents success and rest indicates failure
 }
 /*
