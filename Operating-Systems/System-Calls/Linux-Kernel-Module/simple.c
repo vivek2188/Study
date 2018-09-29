@@ -2,10 +2,32 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
+#include <linux/types.h>
+#include <linux/list.h>
+#include <linux/slab.h>
+
+struct birthday{
+	int day;
+	int month;
+	int year;
+	struct list_head list;
+};
+
+struct birthday birthdaylist;
 
 // Module Entry Point - Function is invoked when the module is loaded into kernel
-int simple_init(void){
-	printk(KERN_INFO "Loading Module\n");	
+int simple_init(void){	
+	struct birthday *person;
+	printk(KERN_INFO "Loading Module\n");
+	INIT_LIST_HEAD(&birthdaylist.list);
+
+	person = kmalloc(sizeof(person), GFP_KERNEL);
+	person->day = 1;
+	person->month = 1;
+	person->year = 1990;
+	INIT_LIST_HEAD(&person->list);
+
+
 	return 0;	// 0 represents success and rest indicates failure
 }
 /*
