@@ -13,7 +13,7 @@ struct birthday{
 	int day;	
 	int month;
 	int year;
-	struct list_head *list; // It's circular linked list and list_head is defined in #include <linux/types.h>
+	struct list_head list; // It's circular linked list and list_head is defined in #include <linux/types.h>
 };
 
 // List consisting all birthday data
@@ -23,9 +23,9 @@ struct birthday birthdayList;
 int simple_init(void){
 	printk(KERN_INFO "Loading the module\n");
 	// Declaring the variables
-	struct birthday *person;//, *birthdayVar;
+	struct birthday *person, *birthdayVar;
 	// Defining birthdayList
-	INIT_LIST_HEAD(birthdayList.list);
+	INIT_LIST_HEAD(&birthdayList.list);
 	// Memory allocation for a person's data
 	person = kmalloc(sizeof(*person),GFP_KERNEL);
 	// Initialising instances
@@ -34,7 +34,7 @@ int simple_init(void){
 	person->year = 1990;
 	INIT_LIST_HEAD(&person->list);
 	// Appending to the birthdayList
-	list_add_tail(&person->list,birthdayList.list); // Parameters: new, head
+	list_add_tail(&person->list,&birthdayList.list); // Parameters: new, head
 	// Adding few more data
 	int indx = 1;
 	int day,month,year;
@@ -44,12 +44,18 @@ int simple_init(void){
 	while(indx <= 4){
 		struct birthday *p;
 		p = kmalloc(sizeof(*p),GFP_KERNEL);
-		p->day = 1;
-		p->month = 2;
-		p->year = 1990;
+		p->day = day;
+		p->month = month;
+		p->year = year;
+		day++,month++,year++;
 		INIT_LIST_HEAD(&p->list);
-		list_add_tail(&p->list,birthdayList.list);	
+		list_add_tail(&p->list,&birthdayList.list);	
 		indx++;
+	}
+	// Printing all the data in the kernel log buffer using helper function given in the list header file
+	printk(KERN_INFO "Printing the data\n");
+	list_for_each_entry(birthdayVar,&birthdayList.list,list){
+		printk(KERN_INFO "Day: %d Month: %d Year: %d\n",birthdayVar->day,birthdayVar->month,birthdayVar->year);
 	}
 	return 0;	// 0 represents success and rest indicates failure
 }
