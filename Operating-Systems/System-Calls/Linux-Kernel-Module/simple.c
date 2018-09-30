@@ -69,6 +69,13 @@ int simple_init(void){
 // Module exit point - Function is invoked when the module is removed from the kernel
 void simple_exit(void){
 	printk(KERN_INFO "Removing Module\n");
+	struct birthday *ptr, *next;
+	// Deleting the pointers
+	list_for_each_entry_safe(ptr,next,&birthdayList.list,list){
+		printk(KERN_INFO "Deleted: %d\n",ptr->year);
+		list_del(&ptr->list);
+		kfree(ptr);
+	}
 	// return type must be void
 }
 
