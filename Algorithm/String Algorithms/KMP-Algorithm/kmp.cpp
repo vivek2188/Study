@@ -6,6 +6,7 @@ void compute_prefix_function(int *prefix,string pattern){
 	int m = pattern.length();
 	// For simplicity
 	pattern = '#' + pattern;
+	// Computing Prefix array
 	int k = 0;
 	for(int i=2;i<=m;i++){
 		while(k>0 and pattern[k+1]!=pattern[i])
@@ -27,6 +28,20 @@ void kmp_matcher(string text,string pattern){
 	for(int i=1;i<=m;i++)
 		cout << prefix[i] << " ";
 	cout << "\n";
+	//For simplicity
+	pattern = '#' + pattern;
+	text = '#' + text;
+	int s = 0;
+	for(int i=1;i<=n;i++){
+		while(s>0 and pattern[s+1]!=text[i])
+			s = prefix[s];
+		if(pattern[s+1]==text[i])
+			s = s+1;
+		if(s==m){
+			cout << "Pattern occurs at shift " << i-m << "\n";
+			s = prefix[s];
+		}
+	}
 }
 
 int main(){
