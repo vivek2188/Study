@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 #include <sys/shm.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
-#include <string.h>
-#include <fcntl.h>	// Provides file control options: O_RDWR, O_WRONLY, O_RDONLY etc.
-#include <stdlib.h>
+#include <fcntl.h>
 
 int main(){
 	// the size of shared memory object
