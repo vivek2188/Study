@@ -17,3 +17,9 @@ int main(){
 	}
 	return 0;
 }
+/*
+    Useful Commands: 
+	gcc -o zombie zombie.c
+	./zombie
+	ps -ef | grep zombie
+*/
