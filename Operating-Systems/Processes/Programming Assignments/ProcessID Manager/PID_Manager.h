@@ -1,12 +1,13 @@
 #ifndef PID_MANAGER_H	// Header Gaurds
 #define PID_MANAGER_H
 
-int MIN_PID = 300;
-int MAX_PID = 5000;
-int size = 4701;
-bool map[size];
+#define MIN_PID 300
+#define MAX_PID 5000
+#define SIZE 300
 
-// Helper Functions
+int map[SIZE];
+
+// Functions
 int allocate_map(void);
 
 int allocated_pid(void);
