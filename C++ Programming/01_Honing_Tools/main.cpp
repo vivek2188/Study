@@ -25,5 +25,9 @@ int main(int argc,char *argv[]){
 		}
 		read(in,text);
 	}
+	// Sort the text
+	sort(text.begin(),text.end());
+	//Print the sorted text
+	copy(text.begin(),text.end(),ostream_iterator<string>(cout,"\n"));
 	return 0;
 }
