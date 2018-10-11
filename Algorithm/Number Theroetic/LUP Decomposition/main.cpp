@@ -76,5 +76,15 @@ int main(){
 		cout << "\n";
 	}
 	cout << "Decomposition done\n";
+	for(int i=1;i<=size;i++){
+		if(i==1){
+			y[i] = b[p[i]];
+			continue;
+		}
+		float sum = 0;
+		for(int j=1;j<i;j++)
+			sum += y[j] * l[i][j];
+		y[i] = (b[p[i]] - sum) / l[i][i];
+	}
 	return 0;
 }
