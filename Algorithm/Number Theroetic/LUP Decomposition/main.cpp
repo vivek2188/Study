@@ -3,7 +3,13 @@
 #include <algorithm>
 #include <cmath>
 using namespace std;
-
+/*
+	AX = B
+	PA = LU , P is permutation matrix
+	PA.X = PB
+	LU.X = PB
+	LY = PB where Y = UX
+*/
 int main(){
 	int size;
 	cout << "Size of the matrix: ";
@@ -14,7 +20,7 @@ int main(){
 		for(int j=1;j<=size;j++)
 			cin >> mat[i][j];
 	}
-	cout << "Answer matrix:\n";
+	cout << "Answer matrix: ";
 	float b[size+1];
 	for(int i=1;i<=size;i++)
 		cin >> b[i];
@@ -86,5 +92,21 @@ int main(){
 			sum += y[j] * l[i][j];
 		y[i] = (b[p[i]] - sum) / l[i][i];
 	}
+	// Answer Vector
+	for(int i=size;i>=1;i--){
+		if(i==size){
+			x[i] = y[i] / u[i][i];
+			continue;
+		}
+		float sum = 0;
+		for(int j=size;j>i;j--)
+			sum += x[j] * u[i][j];
+		x[i] = (y[i] - sum) / u[i][i];
+	}
+	// Print Answer
+	cout << "Answer: ";
+	for(int i=1;i<=size;i++)
+		cout << x[i] << " ";
+	cout << "\n";
 	return 0;
 }
