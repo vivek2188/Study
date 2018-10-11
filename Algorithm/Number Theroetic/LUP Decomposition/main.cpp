@@ -14,6 +14,10 @@ int main(){
 		for(int j=1;j<=size;j++)
 			cin >> mat[i][j];
 	}
+	cout << "Answer matrix:\n";
+	float b[size+1];
+	for(int i=1;i<=size;i++)
+		cin >> b[i];
 	cout << "Performing decomposition...\n";
 	int p[size+1];
 	for(int i=1;i<=size;i++)
@@ -39,11 +43,38 @@ int main(){
 				mat[i][j] = mat[i][j] - mat[i][k] * mat[k][j];
 		}
 	}
+	float l[size+1][size+1];
+	float u[size+1][size+1];
+	float y[size+1];
+	float x[size+1];
+	for(int i=1;i<=size;i++){
+		for(int j=1;j<=size;j++){
+			if(i>j){
+				l[i][j] = mat[i][j];
+				u[i][j] = 0;			
+			}
+			else if(i==j){
+				l[i][j] = 1;
+				u[i][j] = mat[i][j];
+			}
+			else if(i<j){
+				l[i][j] = 0;
+				u[i][j] = mat[i][j];
+			}
+		}
+	}
+	cout << "L Matrix\n";
 	for(int i=1;i<=size;i++){
 		for(int j=1;j<=size;j++)
-			cout << mat[i][j] << "\t";
+			cout << l[i][j] << "\t";
 		cout << "\n";
-	}	
+	}
+	cout << "U Matrix\n";
+	for(int i=1;i<=size;i++){
+		for(int j=1;j<=size;j++)
+			cout << u[i][j] << "\t";
+		cout << "\n";
+	}
 	cout << "Decomposition done\n";
 	return 0;
 }
