@@ -34,7 +34,7 @@ int main(void){
 		cout << setw(longest_word_size) << left << it->first
 			 << setw(max_count_size) << right << it->second << "\n";
 	}
-	string find_word = "theweghttrh";
+	string find_word = "the";
 	if(mp.find(find_word)==mp.end())
 		cout << "\"" << find_word << "\" not found\n";
 	else cout << "Count of \"" << find_word << "\" is: " << mp[find_word] << "\n";
