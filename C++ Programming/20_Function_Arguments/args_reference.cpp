@@ -5,6 +5,11 @@
 #include <vector>
 using namespace std;
 
+// Reading data helper function
+void read_data(vector<int> &data){
+	copy(istream_iterator<int>(cin),istream_iterator<int>(),back_inserter(data));
+}
+
 void modify(int &a){
 	a = 10;
 }
