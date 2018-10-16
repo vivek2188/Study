@@ -17,16 +17,17 @@ int main(void){
 	cin.imbue(native);
 	cout.imbue(native);
 	count_map counts;
-	int i = 0;
 	string word;
-	while(cin >> word and (i++ <= 4)){
+	while(cin >> word){
 		string copy;
 		for(string::iterator itr=word.begin();itr!=word.end();itr++){
 			if(isalnum(*itr,native))
 				copy.push_back(*itr);
 		}
-		if(not copy.empty())
+		if(not copy.empty()){
 			++counts[copy];
+			cout << copy << "\n";
+		}
 	}
 	// Printing out the map
 	for(count_iter itr=counts.begin();itr!=counts.end();++itr)
