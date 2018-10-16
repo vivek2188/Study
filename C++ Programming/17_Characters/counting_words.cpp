@@ -19,7 +19,6 @@ int main(){
 				copy.push_back(*w);
 		}
 		if(not copy.empty()){
-			cout << copy << "\n";
 			++counts[copy];
 		}
 	}
