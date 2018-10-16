@@ -6,6 +6,7 @@
 #include <algorithm>
 using namespace std;
 
+// Predicate function
 bool compare(int a,int b){
 	if(a>b)
 		return false;
