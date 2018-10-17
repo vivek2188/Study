@@ -5,8 +5,8 @@ using namespace std;
 
 bool non_letter(char ch){
 	if(isalnum(ch,locale()))
-		return true;
-	return false;
+		return false;
+	return true;
 }
 
 char lower_case(char ch){
