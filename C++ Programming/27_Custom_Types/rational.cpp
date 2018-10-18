@@ -16,6 +16,13 @@ int gcd(int a,int b){
 
 /// Defining the custom "rational" type
 struct rational{
+	/// Constructor for the rational datatype
+	/// @param num numerator
+	/// @param deno denominator
+	/// @pre denominator > 0
+	rational(int num,int deno): numerator(num),denominator(deno){
+		reduce();
+	}
 	/// Assign the numerator and denominator, then to reduce to normal form
 	/// @param num numerator
 	/// @param deno denominator
@@ -28,7 +35,6 @@ struct rational{
 	void reduce(){
 		assert(denominator!=0);
 		int div = gcd(numerator,denominator);
-		cout << div << "\n";
 		numerator = numerator / div;
 		denominator = denominator / div;
 	}
@@ -37,13 +43,7 @@ struct rational{
 };
 
 int main(void){
-	rational pi;
-	pi.numerator = 155;
-	pi.denominator = 255;
-	pi.reduce();
-	cout << "pi is about " << pi.numerator << "/" << pi.denominator << "\n";
-	rational new_var;
-	new_var.assign(6,24);
+	rational new_var(13,39);
 	cout << "new_var is about " << new_var.numerator << "/" << new_var.denominator << "\n";
 	return 0;
 }
