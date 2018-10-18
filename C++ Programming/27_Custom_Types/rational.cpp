@@ -47,6 +47,17 @@ struct rational{
 	}
 	int numerator;		///< numerator gets the sign of the rational value
 	int denominator;	///< denominator is always positive
+
+	/// Compare two rational number for equality
+	/// @pre @p a and @p b are reduced to normal form
+	bool operator==(rational const& a,rational const& b){
+		return a.numerator == b.numerator and a.denominator == b.denominator;
+	}
+	/// Compare two rational number for inequality
+	/// @pre @p a and @p b reduced to normal form
+	inline bool operator!=(rational const& a,rational const& b){
+		return not(a==b);
+	}
 };
 
 int main(void){
