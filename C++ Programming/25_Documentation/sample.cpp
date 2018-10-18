@@ -24,8 +24,30 @@
   * @author Vivek Tiwari
   * @version 1.0
 */
+#include <iostream>
+#include <istream>
+#include <ostream>
+#include <string>
+#include <algorithm>
+#include <locale>
+#include <iterator>
+using namespace std;
+
+/** @brief Test for non-letter\n
+ * Test the character @p ch in the global locale
+ * @param ch the character to test
+ * @return true if @p ch is not a letter
+*/
+bool non_letter(char ch){
+	if(isalnum(ch,locale()))
+		return false;
+	return true;
+}
+
 
 int main(void){
-	
+	locale::global(locale(""));
+  cin.imbue(locale());
+  cout.imbue(locale());
 	return 0;
 }
