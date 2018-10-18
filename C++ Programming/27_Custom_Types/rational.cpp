@@ -16,6 +16,9 @@ int gcd(int a,int b){
 
 /// Defining the custom "rational" type
 struct rational{
+	/// COnstructor with single parameter
+	/// @param num numerator
+	rational(int num): numerator(num),denominator(1){}
 	/// Constructor for the rational datatype
 	/// @param num numerator
 	/// @param deno denominator
@@ -48,6 +51,7 @@ struct rational{
 
 int main(void){
 	rational new_var(13,-39);
+	rational new_var_2(5);
 	cout << "new_var is about " << new_var.numerator << "/" << new_var.denominator << "\n";
 	return 0;
 }
