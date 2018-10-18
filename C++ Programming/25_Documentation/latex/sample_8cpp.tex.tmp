@@ -20,6 +20,8 @@ Include dependency graph for sample.\+cpp\+:
 bool \hyperlink{sample_8cpp_ae7e58276ee190d5a034951fd31c7af13}{non\+\_\+letter} (char ch)
 \begin{DoxyCompactList}\small\item\em Test for non-\/letter~\newline
 Test the character {\ttfamily ch} in the global locale. \end{DoxyCompactList}\item 
+char \hyperlink{sample_8cpp_a771c32bc2e30873e5eb34cd899f9f99a}{lower\+\_\+case} (char ch)
+\begin{DoxyCompactList}\small\item\em Convert to lowercase. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{sample_8cpp_a840291bc02cba5474a4cb46a9b9566fe}\label{sample_8cpp_a840291bc02cba5474a4cb46a9b9566fe}} 
 int {\bfseries main} (void)
 \end{DoxyCompactItemize}
@@ -33,6 +35,24 @@ This file is created to provide reference to various conventions and tags suppor
 Hope you find it helpful. 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{sample_8cpp_a771c32bc2e30873e5eb34cd899f9f99a}\label{sample_8cpp_a771c32bc2e30873e5eb34cd899f9f99a}} 
+\index{sample.\+cpp@{sample.\+cpp}!lower\+\_\+case@{lower\+\_\+case}}
+\index{lower\+\_\+case@{lower\+\_\+case}!sample.\+cpp@{sample.\+cpp}}
+\subsubsection{\texorpdfstring{lower\+\_\+case()}{lower\_case()}}
+{\footnotesize\ttfamily char lower\+\_\+case (\begin{DoxyParamCaption}\item[{char}]{ch }\end{DoxyParamCaption})}
+
+
+
+Convert to lowercase. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ch} & the character to test \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The character converted to lowercase 
+\end{DoxyReturn}
 \mbox{\Hypertarget{sample_8cpp_ae7e58276ee190d5a034951fd31c7af13}\label{sample_8cpp_ae7e58276ee190d5a034951fd31c7af13}} 
 \index{sample.\+cpp@{sample.\+cpp}!non\+\_\+letter@{non\+\_\+letter}}
 \index{non\+\_\+letter@{non\+\_\+letter}!sample.\+cpp@{sample.\+cpp}}
@@ -50,5 +70,5 @@ Test the character {\ttfamily ch} in the global locale.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true if {\ttfamily ch} is not a letter 
+T\+R\+UE if {\ttfamily ch} is not a letter 
 \end{DoxyReturn}

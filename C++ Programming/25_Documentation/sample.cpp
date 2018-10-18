@@ -36,12 +36,20 @@ using namespace std;
 /** @brief Test for non-letter\n
  * Test the character @p ch in the global locale
  * @param ch the character to test
- * @return true if @p ch is not a letter
+ * @return TRUE if @p ch is not a letter
 */
 bool non_letter(char ch){
 	if(isalnum(ch,locale()))
 		return false;
 	return true;
+}
+
+/** @brief Convert to lowercase
+ * @param ch the character to test
+ * @return The character converted to lowercase
+*/
+char lower_case(char ch){
+  return tolower(ch,locale());
 }
 
 
