@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstdlib>
+#include "test.hpp"
 using namespace std;
 
 /// Compute the greatest common divisor of two numbers using Euclid's algorithm
@@ -80,5 +81,9 @@ int main(void){
 	rational new_var(13,-39);
 	rational new_var_2(5);
 	cout << "new_var is about " << new_var.numerator << "/" << new_var.denominator << "\n";
+	rational a(60,5);
+	rational b(12);
+	rational c(-24,-2);
+	test(a==b);
 	return 0;
 }
