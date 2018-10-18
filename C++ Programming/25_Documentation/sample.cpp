@@ -30,7 +30,6 @@
 #include <string>
 #include <algorithm>
 #include <locale>
-#include <iterator>
 using namespace std;
 
 /** @brief Test for non-letter\n
@@ -52,10 +51,40 @@ char lower_case(char ch){
   return tolower(ch,locale());
 }
 
+/** @brief Compare two characters without regards of their case.
+ * @param a one character to compare
+ * @param b other character to compare
+ * @return @c TRUE if the characters are the same in lowercase\n
+           @c FALSE if they are different
+*/
+bool same_char(char a,char b){
+  return (lower_case(a)==lower_case(b));
+}
 
+/** @brief Determine whether @p line is palindrome
+ * @param line the string to test
+ * @return TRUE if @p line is same forward and backward
+
+*/
+bool ispalindrome(string line){
+  string::iterator new_end_pointer = remove_if(line.begin(),line.end(),non_letter);
+  string reversed_str(line.begin(),new_end_pointer);
+  reverse(reversed_str.begin(),reversed_str.end());
+  return not reversed_str.empty() and equal(line.begin(),new_end_pointer,reversed_str.begin(),same_char);
+}
+
+/** @brief Main Program\n
+ * Set the global locale to the user's native locale. Then imbue the I/O 
+ * streams with the native locale.
+*/
 int main(void){
 	locale::global(locale(""));
   cin.imbue(locale());
   cout.imbue(locale());
+  string line;
+  while(getline(cin,line)){
+    if(ispalindrome(line))
+      cout << line << "\n";
+  }
 	return 0;
 }

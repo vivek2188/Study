@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lower_5fcase',['lower_case',['../sample_8cpp.html#a771c32bc2e30873e5eb34cd899f9f99a',1,'sample.cpp']]]
+  ['ispalindrome',['ispalindrome',['../sample_8cpp.html#a6202b20aee8c90631b7abf702f72b37e',1,'sample.cpp']]]
 ];

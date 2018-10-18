@@ -11,7 +11,6 @@ Introduction to Doxygen.
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$algorithm$>$}\newline
 {\ttfamily \#include $<$locale$>$}\newline
-{\ttfamily \#include $<$iterator$>$}\newline
 Include dependency graph for sample.\+cpp\+:
 % FIG 0
 \subsection*{Functions}
@@ -22,9 +21,14 @@ bool \hyperlink{sample_8cpp_ae7e58276ee190d5a034951fd31c7af13}{non\+\_\+letter} 
 Test the character {\ttfamily ch} in the global locale. \end{DoxyCompactList}\item 
 char \hyperlink{sample_8cpp_a771c32bc2e30873e5eb34cd899f9f99a}{lower\+\_\+case} (char ch)
 \begin{DoxyCompactList}\small\item\em Convert to lowercase. \end{DoxyCompactList}\item 
+bool \hyperlink{sample_8cpp_ab85ebb58da025afc0c623cd831978a00}{same\+\_\+char} (char a, char b)
+\begin{DoxyCompactList}\small\item\em Compare two characters without regards of their case. \end{DoxyCompactList}\item 
+bool \hyperlink{sample_8cpp_a6202b20aee8c90631b7abf702f72b37e}{ispalindrome} (string line)
+\begin{DoxyCompactList}\small\item\em Determine whether {\ttfamily line} is palindrome. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{sample_8cpp_a840291bc02cba5474a4cb46a9b9566fe}\label{sample_8cpp_a840291bc02cba5474a4cb46a9b9566fe}} 
-int {\bfseries main} (void)
-\end{DoxyCompactItemize}
+int \hyperlink{sample_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+\begin{DoxyCompactList}\small\item\em Main Program~\newline
+Set the global locale to the user\textquotesingle{}s native locale. Then imbue the I/O streams with the native locale. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -35,6 +39,24 @@ This file is created to provide reference to various conventions and tags suppor
 Hope you find it helpful. 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{sample_8cpp_a6202b20aee8c90631b7abf702f72b37e}\label{sample_8cpp_a6202b20aee8c90631b7abf702f72b37e}} 
+\index{sample.\+cpp@{sample.\+cpp}!ispalindrome@{ispalindrome}}
+\index{ispalindrome@{ispalindrome}!sample.\+cpp@{sample.\+cpp}}
+\subsubsection{\texorpdfstring{ispalindrome()}{ispalindrome()}}
+{\footnotesize\ttfamily bool ispalindrome (\begin{DoxyParamCaption}\item[{string}]{line }\end{DoxyParamCaption})}
+
+
+
+Determine whether {\ttfamily line} is palindrome. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & the string to test \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if {\ttfamily line} is same forward and backward 
+\end{DoxyReturn}
 \mbox{\Hypertarget{sample_8cpp_a771c32bc2e30873e5eb34cd899f9f99a}\label{sample_8cpp_a771c32bc2e30873e5eb34cd899f9f99a}} 
 \index{sample.\+cpp@{sample.\+cpp}!lower\+\_\+case@{lower\+\_\+case}}
 \index{lower\+\_\+case@{lower\+\_\+case}!sample.\+cpp@{sample.\+cpp}}
@@ -71,4 +93,25 @@ Test the character {\ttfamily ch} in the global locale.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 T\+R\+UE if {\ttfamily ch} is not a letter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sample_8cpp_ab85ebb58da025afc0c623cd831978a00}\label{sample_8cpp_ab85ebb58da025afc0c623cd831978a00}} 
+\index{sample.\+cpp@{sample.\+cpp}!same\+\_\+char@{same\+\_\+char}}
+\index{same\+\_\+char@{same\+\_\+char}!sample.\+cpp@{sample.\+cpp}}
+\subsubsection{\texorpdfstring{same\+\_\+char()}{same\_char()}}
+{\footnotesize\ttfamily bool same\+\_\+char (\begin{DoxyParamCaption}\item[{char}]{a,  }\item[{char}]{b }\end{DoxyParamCaption})}
+
+
+
+Compare two characters without regards of their case. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & one character to compare \\
+\hline
+{\em b} & other character to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily T\+R\+UE} if the characters are the same in lowercase~\newline
+ {\ttfamily F\+A\+L\+SE} if they are different 
 \end{DoxyReturn}
