@@ -34,6 +34,10 @@ struct rational{
 	/// Reduce the numerator and denominator by their gcd
 	void reduce(){
 		assert(denominator!=0);
+		if(denominator<0){
+			numerator = -numerator;
+			denominator = -denominator;
+		}
 		int div = gcd(numerator,denominator);
 		numerator = numerator / div;
 		denominator = denominator / div;
@@ -43,7 +47,7 @@ struct rational{
 };
 
 int main(void){
-	rational new_var(13,39);
+	rational new_var(13,-39);
 	cout << "new_var is about " << new_var.numerator << "/" << new_var.denominator << "\n";
 	return 0;
 }
