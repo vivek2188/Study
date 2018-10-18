@@ -2,6 +2,7 @@
 #include <ostream>
 #include <algorithm>
 #include <cassert>
+#include <cstdlib>
 using namespace std;
 
 /// Compute the greatest common divisor of two numbers using Euclid's algorithm
@@ -47,18 +48,33 @@ struct rational{
 	}
 	int numerator;		///< numerator gets the sign of the rational value
 	int denominator;	///< denominator is always positive
-
-	/// Compare two rational number for equality
-	/// @pre @p a and @p b are reduced to normal form
-	bool operator==(rational const& a,rational const& b){
-		return a.numerator == b.numerator and a.denominator == b.denominator;
-	}
-	/// Compare two rational number for inequality
-	/// @pre @p a and @p b reduced to normal form
-	inline bool operator!=(rational const& a,rational const& b){
-		return not(a==b);
-	}
 };
+/// Compare two rational number for equality
+/// @pre @p a and @p b are reduced to normal form
+bool operator==(rational const& a,rational const& b){
+	return a.numerator == b.numerator and a.denominator == b.denominator;
+}
+/// Compare two rational number for inequality
+/// @pre @p a and @p b reduced to normal form
+inline bool operator!=(rational const& a,rational const& b){
+	return not(a==b);
+}
+/// Compare two rational number for less-than
+bool operator<(rational const& a,rational const& b){
+	return a.numerator * b.denominator < a.denominator * b.numerator;
+}
+/// Compare two rational number for less-than-or-equal
+inline bool operator<=(rational const& a,rational const& b){
+	return not (b<a);
+}
+/// Compare two rational number for greater-than
+inline bool operator>(rational const& a,rational const& b){
+	return b<a;
+}
+/// Compare two rational number for greater-than-or-equal
+inline bool operator>=(rational const& a,rational const& b){
+	return not (b>a);
+}
 
 int main(void){
 	rational new_var(13,-39);
