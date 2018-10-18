@@ -15,6 +15,11 @@ int gcd(int a,int b){
 
 /// Defining the custom "rational" type
 struct rational{
+	void reduce(){
+		int div = gcd(numerator,denominator);
+		numerator = numerator / div;
+		denominator = denominator / div;
+	}
 	int numerator;		///< numerator gets the sign of the rational value
 	int denominator;	///< denominator is always positive
 };
@@ -23,6 +28,7 @@ int main(void){
 	rational pi;
 	pi.numerator = 155;
 	pi.denominator = 255;
+	pi.reduce();
 	cout << "pi is about " << pi.numerator << "/" << pi.denominator << "\n";
 	return 0;
 }
