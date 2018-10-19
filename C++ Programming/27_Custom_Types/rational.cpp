@@ -40,6 +40,16 @@ struct rational{
 		denominator = deno;
 		reduce();
 	}
+	/// Converting to floating point types
+	float as_float(rational const& a){
+		return static_cast<float>(a.numerator) / a.denominator;
+	}
+	double as_double(rational const& a){
+		return static_cast<double>(a.numerator) / a.denominator;
+	}
+	long double as_long_double(rational const& a){
+		return static_cast<long double>(a.numerator) / a.denominator;
+	}
 	/// Reduce the numerator and denominator by their gcd
 	void reduce(){
 		assert(denominator!=0);
@@ -108,6 +118,10 @@ rational operator*(rational const& a,int b){
 }
 inline rational operator*(int b,rational const& a){
 	return a*b;
+}
+/// Computing the absolute value
+rational absval(rational const& a){
+	return rational(abs(a.numerator),a.denominator);
 }
 
 int main(void){
