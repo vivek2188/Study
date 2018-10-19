@@ -22,7 +22,7 @@ struct rational{
 	/// @param num numerator
 	rational(int num): numerator(num),denominator(1){}
 	/// COnstructor for a floating point argument
-	rational(double r): numerator(static_cast<int>(r*10000),denominator(10000)){
+	rational(double r): numerator(static_cast<int>(r*10000)),denominator(10000){
 		reduce();
 	}
 	/// Constructor for the rational datatype
@@ -101,6 +101,13 @@ rational operator*(rational const& a,rational const& b){
 /// Dividing two rational numbers
 rational operator/(rational const& a,rational const& b){
 	return rational(a.numerator*b.denominator,a.denominator*b.numerator);
+}
+/// Optimizing for single specific type
+rational operator*(rational const& a,int b){
+	return rational(a.numerator*b,a.denominator);
+}
+inline rational operator*(int b,rational const& a){
+	return a*b;
 }
 
 int main(void){
