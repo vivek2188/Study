@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstdlib>
+#include <sstream>
 #include "test.hpp"
 using namespace std;
 
@@ -92,8 +93,6 @@ inline bool operator>=(rational const& a,rational const& b){
 }
 /// Adding of two rational numbers
 rational operator+(rational const& a,rational const& b){
-	cout << a.numerator << " " << a.denominator << "\n"
-	     << b.numerator << " " << b.denominator << "\n";
 	return rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator);
 }
 /// Negating a rational number
@@ -123,15 +122,24 @@ inline rational operator*(int b,rational const& a){
 rational absval(rational const& a){
 	return rational(abs(a.numerator),a.denominator);
 }
+/// Output operator
+ostream& operator<<(ostream& out,rational const& r){	// don't miss & in return type
+	ostringstream temp;		// ostringstream is defined in the "sstream" header file
+	temp << r.numerator;
+	if(r.denominator!=1)
+		temp << '/' << r.denominator;
+	out << temp.str() << '\n';
+	return out;
+}
 
 int main(void){
 	rational new_var(13,-39);
 	rational new_var_2(5);
-	cout << "new_var is about " << new_var.numerator << "/" << new_var.denominator << "\n";
+	cout << "new_var is about " << new_var;
 	rational a(60,5);
 	rational b(12);
 	rational c(-24,-2);
 	rational d = a-b;
-	cout << "d is about " << d.numerator << "/" << d.denominator << "\n"; 
+	cout << "d is about " << d;
 	return 0;
 }
