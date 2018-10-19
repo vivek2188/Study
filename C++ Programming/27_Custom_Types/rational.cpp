@@ -64,6 +64,12 @@ struct rational{
 		numerator = numerator / div;
 		denominator = denominator / div;
 	}
+	/// Assignment operator
+	rational& operator=(rational const& r){
+		this->numerator = r.numerator;
+		this->denominator = r.denominator;
+		return *this;
+	}
 	int numerator;		///< numerator gets the sign of the rational value
 	int denominator;	///< denominator is always positive
 };
