@@ -21,6 +21,8 @@ int gcd(int a,int b){
 
 /// Defining the custom "rational" type
 struct rational{
+	/// Default constructor
+	rational(): numerator(0),denominator(1){}
 	/// COnstructor with single parameter
 	/// @param num numerator
 	rational(int num): numerator(num),denominator(1){}
