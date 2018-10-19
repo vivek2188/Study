@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <sstream>
+#include <ios>
 #include "test.hpp"
 using namespace std;
 
@@ -131,6 +132,22 @@ ostream& operator<<(ostream& out,rational const& r){	// don't miss & in return t
 	out << temp.str() << '\n';
 	return out;
 }
+/// Input operator
+istream& operator>>(istream& in,rational& r){
+	int n,d;
+	char sep;
+	if(not(in >> n >> sep))
+		in.setstate(cin.failbit);
+	else if(sep!='/'){
+		in.unget();
+		r.assign(n,1);
+	}
+	else if(in >> d)
+		r.assign(n,d);
+	else 
+		in.setstate(cin.failbit);
+	return in;
+}
 
 int main(void){
 	rational new_var(13,-39);
@@ -141,5 +158,7 @@ int main(void){
 	rational c(-24,-2);
 	rational d = a-b;
 	cout << "d is about " << d;
+	rational d1(1);
+	cin >> d1;
 	return 0;
 }
