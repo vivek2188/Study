@@ -76,6 +76,28 @@ inline bool operator>(rational const& a,rational const& b){
 inline bool operator>=(rational const& a,rational const& b){
 	return not (b>a);
 }
+/// Adding of two rational numbers
+rational operator+(rational const& a,rational const& b){
+	cout << a.numerator << " " << a.denominator << "\n"
+	     << b.numerator << " " << b.denominator << "\n";
+	return rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator);
+}
+/// Negating a rational number
+rational operator-(rational const& a){
+	return rational(-a.numerator,a.denominator);
+}
+/// Subtracting two rational numbers
+rational operator-(rational const& a,rational const& b){
+	return a + (-b);
+}
+/// Multiplying two rational numbers
+rational operator*(rational const& a,rational const& b){
+	return rational(a.numerator*b.numerator,a.denominator*b.denominator);
+}
+/// Dividing two rational numbers
+rational operator/(rational const& a,rational const& b){
+	return rational(a.numerator*b.denominator,a.denominator*b.numerator);
+}
 
 int main(void){
 	rational new_var(13,-39);
@@ -84,6 +106,7 @@ int main(void){
 	rational a(60,5);
 	rational b(12);
 	rational c(-24,-2);
-	test(a==b);
+	rational d = a-b;
+	cout << "d is about " << d.numerator << "/" << d.denominator << "\n"; 
 	return 0;
 }
