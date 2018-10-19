@@ -70,6 +70,12 @@ struct rational{
 		this->denominator = r.denominator;
 		return *this;
 	}
+	/// Assignment operator with int on RHS
+	rational& operator=(int a){
+		this->numerator = a;
+		this->denominator = 1;
+		return *this;
+	}
 	int numerator;		///< numerator gets the sign of the rational value
 	int denominator;	///< denominator is always positive
 };
