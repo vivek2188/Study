@@ -21,6 +21,10 @@ struct rational{
 	/// COnstructor with single parameter
 	/// @param num numerator
 	rational(int num): numerator(num),denominator(1){}
+	/// COnstructor for a floating point argument
+	rational(double r): numerator(static_cast<int>(r*10000),denominator(10000)){
+		reduce();
+	}
 	/// Constructor for the rational datatype
 	/// @param num numerator
 	/// @param deno denominator
