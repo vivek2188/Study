@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <sstream>
 #include <ios>
+#include <limits>
 #include "test.hpp"
 using namespace std;
 
@@ -129,7 +130,7 @@ ostream& operator<<(ostream& out,rational const& r){	// don't miss & in return t
 	temp << r.numerator;
 	if(r.denominator!=1)
 		temp << '/' << r.denominator;
-	out << temp.str() << '\n';
+	out << temp.str();
 	return out;
 }
 /// Input operator
@@ -148,17 +149,26 @@ istream& operator>>(istream& in,rational& r){
 		in.setstate(cin.failbit);
 	return in;
 }
+/// Test for failbit
+bool iofailure(istream& in){
+	return in.fail() and not in.bad();
+}
 
 int main(void){
-	rational new_var(13,-39);
-	rational new_var_2(5);
-	cout << "new_var is about " << new_var;
-	rational a(60,5);
-	rational b(12);
-	rational c(-24,-2);
-	rational d = a-b;
-	cout << "d is about " << d;
-	rational d1(1);
-	cin >> d1;
+	rational r(0);
+	while(cin){
+		if(cin >> r){
+			cout << "r is about: " << r << endl;
+		}
+		else if(iofailure(cin)){
+			cout << "Error detected\n";
+			cin.clear();
+			cin.ignore(numeric_limits<int>::max(),'\n');
+		}
+		if(cin.bad()){
+			cerr << "Unrecoverable error\n";
+			break;
+		}
+	}
 	return 0;
 }
