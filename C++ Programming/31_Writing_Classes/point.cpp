@@ -9,11 +9,11 @@ struct point{
 	point(double x_cor,double y_cor): x(x_cor),y(y_cor){}
 	point(point const& p): x(p.x),y(p.y){}
 	// Distance from the origin
-	double distance(){
+	double distance() const{
 		return sqrt(x*x+y*y);
 	}
 	// Angle relative to x-axis
-	double angle(){
+	double angle() const{
 		return atan2(y,x);
 	}
 	// Add an offset to x and y
