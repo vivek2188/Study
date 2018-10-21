@@ -31,6 +31,15 @@ struct point{
 		void move_polar(double r,double angle_){
 			return move_cartesian(r*cos(angle_),r*sin(angle_));
 		}
+		void scale_cartesian(double s){
+			scale_cartesian(s,s);
+		}
+		void scale_cartesian(double s_x,double s_y){
+			move_cartesian(get_x()*s_x,get_y()*s_y);
+		}
+		void scale_polar(double r){
+			move_cartesian(distance()*r,angle());
+		}
 		// Add an offset to x and y
 		void offset(double off){
 			offset(off,off);
@@ -38,14 +47,6 @@ struct point{
 		void offset(double off_x,double off_y){
 			x += off_x;
 			y += off_y;
-		}
-		// Scale x and y
-		void scale(double mult){
-			scale(mult,mult);
-		}
-		void scale(double mult_x,double mult_y){
-			x *= mult_x;
-			y *= mult_y;
 		}
 	private:
 		// Data members
