@@ -7,7 +7,12 @@ struct point{
 	public:
 		// Constructors
 		point(): x(0),y(0){}
-		point(double x_cor,double y_cor): x(x_cor),y(y_cor){}
+		point(double x_cor,double y_cor,bool is_polar){
+			if(is_polar)
+				move_polar(x_cor,y_cor);
+			else
+				move_cartesian(x_cor,y_cor);
+		}
 		point(point const& p): x(p.x),y(p.y){}
 		// Accessing the private mmebers using public member functions
 		double get_x() const{
