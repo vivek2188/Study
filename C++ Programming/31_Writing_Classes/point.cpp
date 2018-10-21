@@ -24,6 +24,13 @@ struct point{
 		double angle() const{
 			return atan2(y,x);
 		}
+		void move_cartesian(double x_,double y_){
+			x = x_;
+			y = y_;
+		}
+		void move_polar(double r,double angle_){
+			return move_cartesian(r*cos(angle_),r*sin(angle_));
+		}
 		// Add an offset to x and y
 		void offset(double off){
 			offset(off,off);
@@ -47,10 +54,10 @@ struct point{
 };
 
 int main(void){
-	point origin, unity;
+	point origin, unity;/*
 	origin.x = origin.y  = 0;
 	unity.x = unity.y = 1;
 	cout << "Origin: (" << origin.x << "," << origin.y << ")\n";
-	cout << "Unity: (" << unity.x << "," << unity.y << ")\n";
+	cout << "Unity: (" << unity.x << "," << unity.y << ")\n";*/
 	return 0;
 }
