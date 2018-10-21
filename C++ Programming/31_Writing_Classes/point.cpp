@@ -9,6 +9,13 @@ struct point{
 		point(): x(0),y(0){}
 		point(double x_cor,double y_cor): x(x_cor),y(y_cor){}
 		point(point const& p): x(p.x),y(p.y){}
+		// Accessing the private mmebers using public member functions
+		double get_x() const{
+			return x;
+		}
+		double get_y() const{
+			return y;
+		}
 		// Distance from the origin
 		double distance() const{
 			return sqrt(x*x+y*y);
