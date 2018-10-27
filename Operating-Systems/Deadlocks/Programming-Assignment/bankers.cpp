@@ -16,7 +16,9 @@ vector<int> ans;					// Stores the safe sequence
 // Print the ans vector
 void print(vector<int> ans){
 	cout << "Safe Sequence: ";
-	copy(ans.begin(),ans.end(),ostream_iterator<int>(cout," "));
+	//copy(ans.begin(),ans.end(),ostream_iterator<int>(cout," "));
+	for(vector<int>::iterator it=ans.begin();it!=ans.end();++it)
+		cout << *it + 1 << " ";
 	cout << "\n";
 }
 
@@ -79,5 +81,6 @@ int main(void){
 		cin >> available[i];
 	cout << "Running the banker's algorithm...\n";
 	backtrack(n,m);
+	cout << "Algorithm executed\n";
 	return 0;
 }
