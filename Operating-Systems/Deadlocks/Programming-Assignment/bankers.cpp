@@ -9,7 +9,8 @@ using namespace std;
 int allocated[MAX_VAL][MAX_VAL];	// Already allocated resources to the processes
 int required[MAX_VAL][MAX_VAL];		// Total maximum requirement for each process
 int available[MAX_VAL];				// Total number of instances of each resource
-bool finish[MAX_VAL];				// Maintains the array which keeps track of process has finished or not
+bool finish[MAX_VAL];				// Maintains the array which keeps track of whether 
+									// the process has finished or not
 vector<int> ans;					// Stores the safe sequence
 
 // Print the ans vector
@@ -19,11 +20,19 @@ void print(vector<int> ans){
 	cout << "\n";
 }
 
+// Check whether the process i can be completed with currently available resources
+bool can_be_done(int i,int m){
+	for(int j=0;j<m;++j)
+		if(required[i][j]-allocated[i][j] > available[j])
+			return false;
+	return true;
+}
+
 void backtrack(int n,int m){
 	int i=0;
 	for(int i=0;i<n;i++){
 		// Check whether the process can be done with presently available resources
-		if(finish[i]==0 and can_be_done(i)){
+		if(finish[i]==0 and can_be_done(i,m)){
 			finish[i] = 1;
 			add_resource(i);	///< Update the available array
 			ans.push_back(i);	// Append to the ans vector
