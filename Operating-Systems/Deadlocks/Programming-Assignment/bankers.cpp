@@ -9,9 +9,27 @@ int allocated[MAX_VAL][MAX_VAL];	// Already allocated resources to the processes
 int required[MAX_VAL][MAX_VAL];		// Total maximum requirement for each process
 int available[MAX_VAL];				// Total number of instances of each resource
 bool finish[MAX_VAL];				// Maintains the array which keeps track of process has finished or not
+vector<int> ans;					// Stores the safe sequence
 
 void backtrack(int n,int m){
-	
+	int i=0;
+	for(int i=0;i<n;i++){
+		// Check whether the process can be done with presently available resources
+		if(finish[i]==0 and can_be_done(i)){
+			finish[i] = 1;
+			add_resource(i);	///< Update the available array
+			ans.push_back(i);	// Append to the ans vector
+			// Recur the same process
+			backtrack(n,m);
+			// Print the ans matrix if the all the processes have finished
+			if(ans.size()==n)
+				print(ans);
+			// Undo the above steps
+			remove_resource(i);
+			finish[i] = 0;
+			ans.pop_back();
+		}
+	}
 }
 
 int main(void){
