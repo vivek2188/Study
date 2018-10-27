@@ -5,11 +5,17 @@
 using namespace std;
 
 #define MAX_VAL 100
-int allocated[MAX_VAL][MAX_VAL];
-int required[MAX_VAL][MAX_VAL];
-int available[MAX_VAL];
+int allocated[MAX_VAL][MAX_VAL];	// Already allocated resources to the processes
+int required[MAX_VAL][MAX_VAL];		// Total maximum requirement for each process
+int available[MAX_VAL];				// Total number of instances of each resource
+bool finish[MAX_VAL];				// Maintains the array which keeps track of process has finished or not
+
+void backtrack(int n,int m){
+	
+}
 
 int main(void){
+	// Input
 	int n,m;
 	cout << "Number of processes: ";
 	cin >> n;
