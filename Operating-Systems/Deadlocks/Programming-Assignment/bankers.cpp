@@ -29,12 +29,11 @@ bool can_be_done(int i,int m){
 }
 
 void backtrack(int n,int m){
-	int i=0;
 	for(int i=0;i<n;i++){
 		// Check whether the process can be done with presently available resources
 		if(finish[i]==0 and can_be_done(i,m)){
 			finish[i] = 1;
-			add_resource(i);	///< Update the available array
+			add_resource(i,m);	///< Update the available array
 			ans.push_back(i);	// Append to the ans vector
 			// Recur the same process
 			backtrack(n,m);
@@ -42,11 +41,12 @@ void backtrack(int n,int m){
 			if(ans.size()==n)
 				print(ans);
 			// Undo the above steps
-			remove_resource(i);
+			remove_resource(i,m);
 			finish[i] = 0;
 			ans.pop_back();
 		}
 	}
+	return;
 }
 
 int main(void){
