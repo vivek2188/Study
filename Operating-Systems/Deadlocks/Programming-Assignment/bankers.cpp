@@ -1,6 +1,7 @@
 #include <iostream>
 #include <istream>
 #include <ostream>
+#include <iterator>
 #include <vector>
 using namespace std;
 
@@ -10,6 +11,13 @@ int required[MAX_VAL][MAX_VAL];		// Total maximum requirement for each process
 int available[MAX_VAL];				// Total number of instances of each resource
 bool finish[MAX_VAL];				// Maintains the array which keeps track of process has finished or not
 vector<int> ans;					// Stores the safe sequence
+
+// Print the ans vector
+void print(vector<int> ans){
+	cout << "Safe Sequence: ";
+	copy(ans.begin(),ans.end(),ostream_iterator<int>(cout,' '));
+	cout << "\n";
+}
 
 void backtrack(int n,int m){
 	int i=0;
