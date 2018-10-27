@@ -16,7 +16,7 @@ vector<int> ans;					// Stores the safe sequence
 // Print the ans vector
 void print(vector<int> ans){
 	cout << "Safe Sequence: ";
-	copy(ans.begin(),ans.end(),ostream_iterator<int>(cout,' '));
+	copy(ans.begin(),ans.end(),ostream_iterator<int>(cout," "));
 	cout << "\n";
 }
 
