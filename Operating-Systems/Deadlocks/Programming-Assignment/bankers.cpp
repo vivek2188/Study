@@ -28,6 +28,16 @@ bool can_be_done(int i,int m){
 	return true;
 }
 
+// Update the available array
+void add_resource(int i,int m){
+	for(int j=0;j<m;++j)
+		available[j] += allocated[i][j];
+}
+void remove_resource(int i,int m){
+	for(int j=0;j<m;++j)
+		available[j] -= allocated[i][j];
+}
+
 void backtrack(int n,int m){
 	for(int i=0;i<n;i++){
 		// Check whether the process can be done with presently available resources
