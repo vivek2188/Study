@@ -29,7 +29,8 @@ int main(){
 	for(int i=1;i<=size;i++)
 		p[i] = i;
 	for(int k=1;k<=size;k++){
-		int pi = 0,k1;
+		float pi = 0;
+		int k1;
 		for(int i=k;i<=size;i++){
 			if(abs(mat[i][k])>pi){
 				pi = abs(mat[i][k]);
