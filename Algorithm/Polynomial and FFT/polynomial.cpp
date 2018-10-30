@@ -34,8 +34,10 @@ class polynomial{
 			coeff.clear();
 			input();
 		}
-		/// Addition of two polynomials
+		/// Adding two polynomials of same degree
 		polynomial add(polynomial const&);
+		/// Multiplying two polynomials of same degree
+		polynomial multiply(polynomial const&);
 		/// Print the coefficient vector
 		void print(){
 			if(degree==-1){
@@ -58,6 +60,21 @@ polynomial polynomial::add(polynomial const& p){
 		add_.coeff.push_back(data);
 	}
 	return add_;
+}
+// Time Complexity: O(n*n)
+polynomial polynomial::multiply(polynomial const& p){
+	if(degree!=p.degree || degree<0){
+		cout << "Degree of two polynomial must be same and >= 0.\n";
+		return polynomial(-1);
+	}
+	polynomial mult(2*degree-1);
+	for(int i=0;i<=mult.degree;++i){
+		mult.coeff.push_back(0);
+		for(int j=0;j<=i;j++)
+			if(j<=degree and i-j<=degree)
+				mult.coeff[i] += coeff[j] * p.coeff[i-j];
+	}
+	return mult;
 }
 
 int main(void){
