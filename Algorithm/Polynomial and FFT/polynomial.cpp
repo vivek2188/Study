@@ -38,6 +38,15 @@ class polynomial{
 		polynomial add(polynomial const&);
 		/// Multiplying two polynomials of same degree
 		polynomial multiply(polynomial const&);
+		/// Evaluate for x: Horner's Rule
+		int evaluate(int x){
+			if(degree==-1)
+				return -1;
+			int ans = 0;
+			for(int i=degree;i>=0;--i)
+				ans = x*ans + coeff[i];
+			return ans;
+		}
 		/// Print the coefficient vector
 		void print(){
 			if(degree==-1){
