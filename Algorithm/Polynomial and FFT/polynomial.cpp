@@ -29,6 +29,12 @@ struct complex{
 	complex multiply(complex b){
 		return complex(r*b.r-i*b.i,r*b.i+i*b.r);
 	}
+	// Inverse of a complex number
+	void inverse(){
+		float mag = sqrt(r*r+i*i);
+		r /= mag;
+		i = -i/mag;
+	}
 	// Real and imaginary part
 	float r,i;
 };
@@ -66,6 +72,10 @@ class polynomial{
 		vector<float> get_coefficient(){
 			return coeff;
 		}
+		/// Accessing the degree bound
+		int get_bound(){
+			return degree+1;
+		}
 		/// Adding two polynomials of same degree
 		polynomial add(polynomial const&);
 		/// Multiplying two polynomials of same degree
@@ -73,7 +83,7 @@ class polynomial{
 		/// Coefficient form to point form representation
 		vector<complex> to_point(vector<float>);
 		/// Point form to coefficient form representation
-		vector<float> to_coefficient(vector<complex>);
+		vector<complex> to_coefficient(vector<complex>);
 		/// Evaluate for x: Horner's Rule
 		int evaluate(float x){
 			if(degree==-1)
@@ -156,20 +166,75 @@ vector<complex> polynomial::to_point(vector<float> a){
 	return y;
 }
 /// Applying Inverse FFT to convert the polynomial from point form to coefficient form
-vector<float> to_coefficient(vector<complex> y){
-	// Write code for inverse FFT
+vector<complex> polynomial::to_coefficient(vector<complex> y){
+	vector<complex> coeff;
+	int n = y.size();
+	if((n&(n-1))!=0){
+		cout << "Degree bound must be power of 2\n";
+		return coeff;
+	}
+	if(n==1){
+		coeff.push_back(y[0]);
+		return coeff;
+	}
+	complex wN(n);
+	wN.inverse();
+	complex w(1,0);
+	vector<complex> y0, y1;
+	for(int i=0;i<n;i++){
+		if(i%2==0)
+			y0.push_back(y[i]);
+		else y1.push_back(y[i]);
+	}
+	/*copy(a0.begin(),a0.end(),ostream_iterator<float>(cout," "));
+	copy(a1.begin(),a1.end(),ostream_iterator<float>(cout," "));*/
+	vector<complex> coeff0 = to_coefficient(y0);
+	vector<complex> coeff1 = to_coefficient(y1);
+	// Initialising y
+	for(int i=0;i<n;i++)
+		coeff.push_back(complex());
+	// Combining the subproblems
+	for(int k=0;k<=n/2-1;++k){
+		coeff[k] = coeff0[k].add(w.multiply(coeff1[k]));
+		coeff[k+n/2] = coeff0[k].subtract(w.multiply(coeff1[k]));
+		w = w.multiply(wN);
+	}
+	return coeff;
 }
 
 int main(void){
 	int degree;
 	cout << "Enter the degree: ";
 	cin >> degree;
-	polynomial p1(degree);
-	p1.input();
-	vector<float> coeff = p1.get_coefficient();
-	vector<complex> y = p1.to_point(coeff);
+	polynomial p(degree);
+	p.input();
+	vector<float> coeff = p.get_coefficient();
+	vector<complex> y = p.to_point(coeff);
 	cout << "Point form is:\n";
-	for(int i=0;i<y.size();++i)
-		cout << "(" << y[i].r << "," << y[i].i << ")" << "\n";
+	for(int i=0;i<y.size();++i){
+		cout << "(";
+		if(abs(y[i].r)<1e-6)
+			cout << 0;
+		else cout << y[i].r;
+		cout << ",";
+		if(abs(y[i].i)<1e-6)
+			cout << 0;
+		else cout << y[i].i; 
+		cout << ")" << "\n";
+	}
+	vector<complex> coeffComplex = p.to_coefficient(y);
+	cout << "Coefficient form is:\n";
+	int n = p.get_bound();
+	for(int i=0;i<coeffComplex.size();++i){
+		cout << "(";
+		if(abs(coeffComplex[i].r)<1e-6)
+			cout << 0;
+		else cout << coeffComplex[i].r/n;
+		cout << ",";
+		if(abs(coeffComplex[i].i)<1e-6)
+			cout << 0;
+		else cout << coeffComplex[i].i/n; 
+		cout << ")" << "\n";
+	}
 	return 0;
 }
