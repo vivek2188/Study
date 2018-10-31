@@ -19,6 +19,14 @@ struct complex{
 	// Real and imaginary part
 	float r,i;
 };
+/// Addding two complex numbers
+complex add(complex a,complex b){
+	return complex(a.r+b.r,a.i+b.i);
+}
+/// Subtracting two complex numbers
+complex subtract(complex a,complex b){
+	return complex(a.r-b.r,a.i-b.i);
+}
 
 class polynomial{
 	vector<int> coeff;
