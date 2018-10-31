@@ -3,7 +3,12 @@
 #include <ostream>
 #include <vector>
 #include <iterator>
+#include <cmath>
 using namespace std;
+
+struct complex{
+	float r,i;
+};
 
 class polynomial{
 	vector<int> coeff;
@@ -34,10 +39,16 @@ class polynomial{
 			coeff.clear();
 			input();
 		}
+		/// Accessing the coefficient vector
+		vector<int> get_coefficient(){
+			return coeff;
+		}
 		/// Adding two polynomials of same degree
 		polynomial add(polynomial const&);
 		/// Multiplying two polynomials of same degree
 		polynomial multiply(polynomial const&);
+		/// Coefficient form to point form representation
+		vector<complex> to_point(vector<int>);
 		/// Evaluate for x: Horner's Rule
 		int evaluate(int x){
 			if(degree==-1)
@@ -85,11 +96,24 @@ polynomial polynomial::multiply(polynomial const& p){
 	}
 	return mult;
 }
+/// Applying FFT to convert the polynomial from coefficient form to point form
+vector<complex> polynomial::to_point(vector<int> a){
+	vector<complex> y;
+	int n = a.size();
+	if((n&(n-1))!=0){
+		cout << "Degree bound must be power of 2\n";
+		return y;
+	}
+	return y;
+}
 
 int main(void){
 	int degree;
 	cout << "Enter the degree: ";
 	cin >> degree;
 	polynomial p1(degree);
+	p1.input();
+	vector<int> coeff = p1.get_coefficient();
+	p1.to_point(coeff);
 	return 0;
 }
