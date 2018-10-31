@@ -13,7 +13,7 @@ struct complex{
 		r = cos((2*M_PI)/n);
 		i = sin((2*M_PI)/n);
 	}
-	complex(int R,int I){
+	complex(float R,float I){
 		r = R;
 		i = I;
 	}
@@ -34,7 +34,7 @@ struct complex{
 };
 
 class polynomial{
-	vector<int> coeff;
+	vector<float> coeff;
 	int degree;
 	public:
 		/// Default Constructor
@@ -49,7 +49,7 @@ class polynomial{
 		/// Getting the input
 		void input(){
 			cout << "Enter the coefficient vector: ";
-			int element;
+			float element;
 			for(int i=0;i<=degree;++i){
 				cin >> element;
 				coeff.push_back(element);
@@ -63,7 +63,7 @@ class polynomial{
 			input();
 		}
 		/// Accessing the coefficient vector
-		vector<int> get_coefficient(){
+		vector<float> get_coefficient(){
 			return coeff;
 		}
 		/// Adding two polynomials of same degree
@@ -71,12 +71,12 @@ class polynomial{
 		/// Multiplying two polynomials of same degree
 		polynomial multiply(polynomial const&);
 		/// Coefficient form to point form representation
-		vector<complex> to_point(vector<int>);
+		vector<complex> to_point(vector<float>);
 		/// Evaluate for x: Horner's Rule
-		int evaluate(int x){
+		int evaluate(float x){
 			if(degree==-1)
 				return -1;
-			int ans = 0;
+			float ans = 0;
 			for(int i=degree;i>=0;--i)
 				ans = x*ans + coeff[i];
 			return ans;
@@ -88,7 +88,7 @@ class polynomial{
 				return;
 			}
 			cout << "Coefficient Vector: ";
-			copy(coeff.begin(),coeff.end(),ostream_iterator<int>(cout," "));
+			copy(coeff.begin(),coeff.end(),ostream_iterator<float>(cout," "));
 			cout << endl;
 		}
 };
@@ -98,10 +98,8 @@ polynomial polynomial::add(polynomial const& p){
 		return polynomial(-1);
 	}
 	polynomial add_(degree);
-	for(int i=0;i<=degree;++i){
-		int data = coeff[i] + p.coeff[i];
-		add_.coeff.push_back(data);
-	}
+	for(int i=0;i<=degree;++i)
+		add_.coeff.push_back(coeff[i] + p.coeff[i]);
 	return add_;
 }
 // Time Complexity: O(n*n)
@@ -120,7 +118,7 @@ polynomial polynomial::multiply(polynomial const& p){
 	return mult;
 }
 /// Applying FFT to convert the polynomial from coefficient form to point form
-vector<complex> polynomial::to_point(vector<int> a){
+vector<complex> polynomial::to_point(vector<float> a){
 	vector<complex> y;
 	int n = a.size();
 	if((n&(n-1))!=0){
@@ -134,14 +132,14 @@ vector<complex> polynomial::to_point(vector<int> a){
 	}
 	complex wN(n);
 	complex w(1,0);
-	vector<int> a0, a1;
+	vector<float> a0, a1;
 	for(int i=0;i<n;i++){
 		if(i%2==0)
 			a0.push_back(a[i]);
 		else a1.push_back(a[i]);
 	}
-	/*copy(a0.begin(),a0.end(),ostream_iterator<int>(cout," "));
-	copy(a1.begin(),a1.end(),ostream_iterator<int>(cout," "));*/
+	/*copy(a0.begin(),a0.end(),ostream_iterator<float>(cout," "));
+	copy(a1.begin(),a1.end(),ostream_iterator<float>(cout," "));*/
 	vector<complex> y0 = to_point(a0);
 	vector<complex> y1 = to_point(a1);
 	// Initialising y
@@ -162,7 +160,7 @@ int main(void){
 	cin >> degree;
 	polynomial p1(degree);
 	p1.input();
-	vector<int> coeff = p1.get_coefficient();
+	vector<float> coeff = p1.get_coefficient();
 	vector<complex> y = p1.to_point(coeff);
 	cout << "Point form is:\n";
 	for(int i=0;i<y.size();++i)
