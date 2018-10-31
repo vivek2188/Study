@@ -7,6 +7,16 @@
 using namespace std;
 
 struct complex{
+	complex(): r(0),i(0){}
+	complex(int n){
+		r = cos((2*M_PI)/n);
+		i = sin((2*M_PI)/n);
+	}
+	complex(int R,int I){
+		r = R;
+		i = I;
+	}
+	// Real and imaginary part
 	float r,i;
 };
 
@@ -104,6 +114,12 @@ vector<complex> polynomial::to_point(vector<int> a){
 		cout << "Degree bound must be power of 2\n";
 		return y;
 	}
+	if(n==1){
+		complex y1(a[0],0);
+		y.push_back(y1);
+		return y;
+	}
+	complex wN(n);
 	return y;
 }
 
