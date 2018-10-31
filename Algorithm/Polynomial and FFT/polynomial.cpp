@@ -120,6 +120,15 @@ vector<complex> polynomial::to_point(vector<int> a){
 		return y;
 	}
 	complex wN(n);
+	complex w(1,0);
+	vector<int> a0, a1;
+	for(int i=0;i<n;i++){
+		if(i%2==0)
+			a0.push_back(a[i]);
+		else a1.push_back(a[i]);
+	}
+	/*copy(a0.begin(),a0.end(),ostream_iterator<int>(cout," "));
+	copy(a1.begin(),a1.end(),ostream_iterator<int>(cout," "));*/
 	return y;
 }
 
