@@ -170,6 +170,6 @@ int main(void){
 	vector<complex> y = p1.to_point(coeff);
 	cout << "Point form is:\n";
 	for(int i=0;i<y.size();++i)
-		cout << " " << y[i].r << "\t" << y[i].i << "\n";
+		cout << "(" << y[i].r << "," << y[i].i << ")" << "\n";
 	return 0;
 }
