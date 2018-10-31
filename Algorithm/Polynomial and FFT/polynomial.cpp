@@ -134,6 +134,12 @@ vector<complex> polynomial::to_point(vector<int> a){
 	// Initialising y
 	for(int i=0;i<n;i++)
 		y.push_back(complex());
+	// Combining the subproblems
+	for(int k=0;k<=n/2-1;++k){
+		y[k] = add(y0[k],multiply(w,y1[k]));
+		y[k+n/2] = subtract(y0[k],multiply(w,y1[k]));
+		w = multiply(w,wN);
+	}
 	return y;
 }
 
