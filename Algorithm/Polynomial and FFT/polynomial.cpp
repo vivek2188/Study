@@ -7,6 +7,7 @@
 using namespace std;
 
 struct complex{
+	// Constructors
 	complex(): r(0),i(0){}
 	complex(int n){
 		r = cos((2*M_PI)/n);
@@ -16,17 +17,21 @@ struct complex{
 		r = R;
 		i = I;
 	}
+	// Addding two complex numbers
+	complex add(complex b){
+		return complex(r+b.r,i+b.i);
+	}
+	// Subtracting two complex numbers
+	complex subtract(complex b){
+		return complex(r-b.r,i-b.i);
+	}
+	// Multiplying two complex numbers
+	complex multiply(complex b){
+		return complex(r*b.r-i*b.i,r*b.i+i*b.r);
+	}
 	// Real and imaginary part
 	float r,i;
 };
-/// Addding two complex numbers
-complex add(complex a,complex b){
-	return complex(a.r+b.r,a.i+b.i);
-}
-/// Subtracting two complex numbers
-complex subtract(complex a,complex b){
-	return complex(a.r-b.r,a.i-b.i);
-}
 
 class polynomial{
 	vector<int> coeff;
@@ -144,9 +149,9 @@ vector<complex> polynomial::to_point(vector<int> a){
 		y.push_back(complex());
 	// Combining the subproblems
 	for(int k=0;k<=n/2-1;++k){
-		y[k] = add(y0[k],multiply(w,y1[k]));
-		y[k+n/2] = subtract(y0[k],multiply(w,y1[k]));
-		w = multiply(w,wN);
+		y[k] = y0[k].add(w.multiply(y1[k]));
+		y[k+n/2] = y0[k].subtract(w.multiply(y1[k]));
+		w = w.multiply(wN);
 	}
 	return y;
 }
@@ -158,6 +163,9 @@ int main(void){
 	polynomial p1(degree);
 	p1.input();
 	vector<int> coeff = p1.get_coefficient();
-	p1.to_point(coeff);
+	vector<complex> y = p1.to_point(coeff);
+	cout << "Point form is:\n";
+	for(int i=0;i<y.size();++i)
+		cout << " " << y[i].r << "\t" << y[i].i << "\n";
 	return 0;
 }
