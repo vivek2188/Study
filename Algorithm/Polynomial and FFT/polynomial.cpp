@@ -129,6 +129,8 @@ vector<complex> polynomial::to_point(vector<int> a){
 	}
 	/*copy(a0.begin(),a0.end(),ostream_iterator<int>(cout," "));
 	copy(a1.begin(),a1.end(),ostream_iterator<int>(cout," "));*/
+	vector<complex> y0 = to_point(a0);
+	vector<complex> y1 = to_point(a1);
 	return y;
 }
 
