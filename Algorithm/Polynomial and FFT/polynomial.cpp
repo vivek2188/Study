@@ -72,6 +72,8 @@ class polynomial{
 		polynomial multiply(polynomial const&);
 		/// Coefficient form to point form representation
 		vector<complex> to_point(vector<float>);
+		/// Point form to coefficient form representation
+		vector<float> to_coefficient(vector<complex>);
 		/// Evaluate for x: Horner's Rule
 		int evaluate(float x){
 			if(degree==-1)
@@ -152,6 +154,10 @@ vector<complex> polynomial::to_point(vector<float> a){
 		w = w.multiply(wN);
 	}
 	return y;
+}
+/// Applying Inverse FFT to convert the polynomial from point form to coefficient form
+vector<float> to_coefficient(vector<complex> y){
+	// Write code for inverse FFT
 }
 
 int main(void){
