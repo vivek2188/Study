@@ -4,6 +4,7 @@
 #include <vector>
 #include <iterator>
 #include <cmath>
+#include <algorithm>
 using namespace std;
 
 struct complex{
@@ -218,6 +219,8 @@ void polynomial::multiply(vector<float> coeff_poly1,vector<float> coeff_poly2){
 	/**
 	  * NOTE: Assuming both the polynomial have degree d
 	  *		  Also, the degree bound i.e. d+1 is a power of 2
+	  *
+	  * Time Complexity: O(n*log(n))
 	*/
 	// Empty the current the coeff vector
 	coeff.clear();
@@ -290,5 +293,12 @@ int main(void){
 	polynomial prod;
 	prod.multiply(coeff_poly1,coeff_poly2);
 	// Get the coefficient vector of the final polynomial
+	vector<float> prod_coeff = prod.get_coefficient();
+	// Reversing the coefficient vector in the decreasing order of the power of x
+	reverse(prod_coeff.begin(),prod_coeff.end());
+	// Print the coefficient vector
+	cout << "Coefficient vector of the multiplication of two polynomial: ";
+	copy(prod_coeff.begin(),prod_coeff.end(),ostream_iterator<float>(cout," "));
+	cout << "\n";
 	return 0;
 }
