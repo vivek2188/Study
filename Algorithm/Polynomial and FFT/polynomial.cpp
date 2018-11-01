@@ -39,6 +39,15 @@ struct complex{
 	float r,i;
 };
 
+vector<complex> compute_product(vector<complex> A,vector<complex> B){
+	vector<complex> C;
+	for(int i=0;i<A.size();++i){
+		complex c = A[i].multiply(B[i]);
+		C.push_back(c);
+	}
+	return C;
+}
+
 class polynomial{
 	vector<float> coeff;
 	int degree;
@@ -223,6 +232,8 @@ void polynomial::multiply(vector<float> coeff_poly1,vector<float> coeff_poly2){
 	}
 	vector<complex> A = to_point(coeff_poly1);
 	vector<complex> B = to_point(coeff_poly2);
+	vector<complex> C = compute_product(A,B);
+	cout << C.size() << "\n";
 	return;
 }
 
@@ -260,5 +271,16 @@ int main(void){
 		else cout << coeffComplex[i].i/n; 
 		cout << ")" << "\n";
 	}
+	// Two polynomials for multiplication
+	polynomial p1(degree);
+	polynomial p2(degree);
+	// Get the input coefficient vector for two polynomials
+	p1.input();
+	p2.input();
+	// Get the coefficient vector
+	vector<float> coeff_poly1 = p1.get_coefficient();
+	vector<float> coeff_poly2 = p2.get_coefficient();
+	polynomial prod;
+	prod.multiply(coeff_poly1,coeff_poly2);
 	return 0;
 }
