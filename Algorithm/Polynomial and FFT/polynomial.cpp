@@ -233,7 +233,13 @@ void polynomial::multiply(vector<float> coeff_poly1,vector<float> coeff_poly2){
 	vector<complex> A = to_point(coeff_poly1);
 	vector<complex> B = to_point(coeff_poly2);
 	vector<complex> C = compute_product(A,B);
-	cout << C.size() << "\n";
+	//cout << C.size() << "\n";
+	vector<complex> coeff_complex = to_coefficient(C);
+	for(int i=0;i<coeff_complex.size();++i){
+		if(abs(coeff_complex[i].r)<1e-5)
+			coeff.push_back(0);
+		else coeff.push_back(coeff_complex[i].r/coeff_complex.size());
+	}
 	return;
 }
 
@@ -280,7 +286,9 @@ int main(void){
 	// Get the coefficient vector
 	vector<float> coeff_poly1 = p1.get_coefficient();
 	vector<float> coeff_poly2 = p2.get_coefficient();
+	// Multiplying two polynomials
 	polynomial prod;
 	prod.multiply(coeff_poly1,coeff_poly2);
+	// Get the coefficient vector of the final polynomial
 	return 0;
 }
