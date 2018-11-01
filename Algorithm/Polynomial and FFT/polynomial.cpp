@@ -80,6 +80,8 @@ class polynomial{
 		polynomial add(polynomial const&);
 		/// Multiplying two polynomials of same degree
 		polynomial multiply(polynomial const&);
+		/// Multiplying two polynomial using FAST FOURIER TRANSFORM
+		void multiply(vector<float>,vector<float>);
 		/// Coefficient form to point form representation
 		vector<complex> to_point(vector<float>);
 		/// Point form to coefficient form representation
@@ -200,6 +202,26 @@ vector<complex> polynomial::to_coefficient(vector<complex> y){
 		w = w.multiply(wN);
 	}
 	return coeff;
+}
+// This function modifies the object itself to be the multiplication of the 
+// two polynomials whose coefficient vectors are passed as parameters
+void polynomial::multiply(vector<float> coeff_poly1,vector<float> coeff_poly2){
+	/**
+	  * NOTE: Assuming both the polynomial have degree d
+	  *		  Also, the degree bound i.e. d+1 is a power of 2
+	*/
+	// Empty the current the coeff vector
+	coeff.clear();
+	int d = coeff_poly2.size();
+	if((d&(d-1))!=0){
+		cout << "Error: Check the degree bound\n";
+		return;
+	}
+	while(coeff_poly2.size()<2*d){
+		coeff_poly2.push_back(0);
+		coeff_poly1.push_back(0);
+	}
+	return;
 }
 
 int main(void){
