@@ -221,6 +221,8 @@ void polynomial::multiply(vector<float> coeff_poly1,vector<float> coeff_poly2){
 		coeff_poly2.push_back(0);
 		coeff_poly1.push_back(0);
 	}
+	vector<complex> A = to_point(coeff_poly1);
+	vector<complex> B = to_point(coeff_poly2);
 	return;
 }
 
