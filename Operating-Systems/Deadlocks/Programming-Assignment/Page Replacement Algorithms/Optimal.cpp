@@ -37,12 +37,10 @@ int main(void){
 				buffer.push_back(i);
 			}
 		}
-		else{
-			if(find(buffer.begin(),buffer.end(),i)==buffer.end()){
-				int l = predict(buffer,pages,j,k);
-				page_fault++;
-				buffer[find(buffer.begin(),buffer.end(),l)-buffer.begin()] = i;
-			}
+		else if(find(buffer.begin(),buffer.end(),i)==buffer.end()){
+			int l = predict(buffer,pages,j,k);
+			page_fault++;
+			buffer[find(buffer.begin(),buffer.end(),l)-buffer.begin()] = i;
 		}
 		j++;
 	}
