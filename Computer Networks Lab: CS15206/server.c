@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 
 int main(void){
-
+	// Creating client and server socket descriptor
+	int ssock, csock;
 	return 0;
 }
