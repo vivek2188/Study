@@ -47,8 +47,17 @@ int main(void){
 		perror("Not accepted\n");
 		return 1;
 	}
+
+	int n;	// Input variable
+
 	while(1){
-		// Write code
+		recv(csock,&n,sizeof(n),0);
+		int ans[n+1];
+		ans[0] = 0;
+		ans[1] = 1;
+		for(int i=2;i<=n;i++)
+			ans[i] = ans[i-1] + ans[i-2];
+		send(csock,ans,sizeof(int)*(n+1),0);
 	}
 	close(ssock);
 	return 0;
