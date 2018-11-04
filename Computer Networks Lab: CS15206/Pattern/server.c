@@ -1,7 +1,11 @@
 /*
-	WAP using client-server programming: A client sends a composite number to the server and the server
-	replies with the prime factorization of the number. Connection should not terminate till the client
-	wants to.
+	WAP using client server socket programming: Client will enter an integer number n and server will
+	return the result with sequence of ∗.
+	E.g., if n = 3
+	Output :
+			* * *
+			 * *
+			  *
 */
 #include <stdio.h>
 #include <stdlib.h>
