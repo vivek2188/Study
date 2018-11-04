@@ -29,11 +29,27 @@ int main(void){
 	len = sizeof(struct sockaddr_in);
 
 	if(connect(csock,(struct sockaddr *)&client,len)==-1){
-		perro("Connection failed\n");
+		perror("Connection failed\n");
 		return 1;
 	}
+
+	int n;	// Input variable
+	int ch = 1;
+
 	while(1){
-		// Write code
+		printf("Enter number: ");
+		scanf("%d",&n);
+		int ans[n+1];
+		send(csock,&n,sizeof(n),0);
+		recv(csock,ans,sizeof(int)*(n+1),0);
+		for(int i=0;i<=n;i++)
+			printf("F%d: %d\n",i,ans[i]);
+		printf("Continue? ");
+		scanf("%d",&ch);
+		if(ch!=1){
+			close(csock);
+			return 0;
+		}
 	}
 	close(csock);
 	return 0;
