@@ -25,7 +25,22 @@ int main(void){
 	bzero(&server.sin_zero,0);
 
 	len = sizeof(struct sockaddr_in);
-
+	// Binding port and IP Address
+	if(bind(ssock,(struct sockaddr *)&server,len)==-1){
+		perror("Bind...\n");
+		return 1;
+	}
+	// Listening client
+	if(listen(ssock,5)==-1){
+		perror("Listen...\n");
+		return -1;
+	}
+	// Accepting connection
+	csock = accept(ssock,(struct sockaddr *)&client,&len);
+	if(csock==-1){
+		perror("Accept...\n");
+		return 1;
+	}
 	while(1){
 		// Write code here
 	}
