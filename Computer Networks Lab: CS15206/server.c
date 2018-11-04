@@ -19,6 +19,10 @@ int main(void){
 		perror("Socket not created\n");
 		return 1;
 	}
+	server.sin_family = AF_INET;
+	server.sin_port = htons(10000);
+	server.sin_addr.s_addr = INADDR_ANY;
+	bzero(&server.sin_zero,0);
 
 	len = sizeof(struct sockaddr_in);
 
