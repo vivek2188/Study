@@ -4,7 +4,7 @@
 int compare(char *id, char *kw){
 	int len1, len2;
 	len1 = strlen(id);
-	len2 = strlen(kw);
+	len2 = strlen(kw) - 1;
 
 	if(len1!=len2)
 		return 0;	// Different
@@ -40,7 +40,6 @@ int match_kwords(char *id, char *file){
 	char line[MAX];
 	while( fgets(line,MAX,fptr) ){
 		if(compare(id, line) == 1){
-			printf("%s", line);
 			match = 1;
 			break;
 		}
@@ -55,7 +54,11 @@ int main(){
 	// Check whether identifier is valid or not
 	if(valid(id)){
 		// Check if it matches with any of the keywords
-		printf("%d", match_kwords(id, "Keywords.txt"));
+		int m = match_kwords(id, "Keywords.txt");
+		if(m==1){
+			printf("INVALID: Matched with a keyword\n");
+		}
+		else printf("Valid Identifier\n");
 	}
 	else
 		printf("ERROR: Invalid Identifier\n");
