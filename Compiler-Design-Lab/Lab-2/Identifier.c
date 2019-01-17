@@ -32,33 +32,49 @@ int valid(char *id){
 	return Valid;
 }
 
-int match_kwords(char *id, char *file){
+int match_word(char *id, char *file){
 	FILE *fptr;
-	int MAX = 100, idx = 1, match = 0;
+	int MAX = 100, idx = 1, match = -1;
 
 	fptr = fopen(file, "r");
 	char line[MAX];
 	while( fgets(line,MAX,fptr) ){
 		if(compare(id, line) == 1){
-			match = 1;
+			match = idx;
 			break;
 		}
+		idx++;
 	}
 	return match;
 }
 
 int main(){
+
 	char id[32];
 	printf("Enter an identifier: ");
 	scanf("%s", id);
+	printf("-----------------------------\n");
+
 	// Check whether identifier is valid or not
 	if(valid(id)){
+
 		// Check if it matches with any of the keywords
-		int m = match_kwords(id, "Keywords.txt");
-		if(m==1){
+		int matched = match_word(id, "Keywords.txt");
+		if(matched!=-1){
 			printf("INVALID: Matched with a keyword\n");
 		}
-		else printf("Valid Identifier\n");
+		else{
+			printf("Valid Identifier\n");
+			// Append to Symbol Table if not present
+			int present = match_word(id, "SymbolTableIdentifier.txt");
+			if(present!=-1)
+				printf("-> Present at index %d\n", present);
+			else{
+				FILE *fpa = fopen("SymbolTableIdentifier.txt","a");
+				fprintf(fpa, "%s\n", id);
+				fclose(fpa);
+			}
+		}
 	}
 	else
 		printf("ERROR: Invalid Identifier\n");
