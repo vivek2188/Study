@@ -26,7 +26,15 @@ public:
 	book(): author_(),pubyear_() {}
 	book(string const& id,string const& title,string const& author,int const& pubyear)
 		: work(id,title),author_(author),pubyear_(pubyear) {}
+	string author() const{
+		return author_;
+	}
+	int pubyear() const{
+		return pubyear_;
+	}
 };
+
+// Yet another 
 
 int main(){
 
