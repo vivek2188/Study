@@ -33,24 +33,24 @@ int match_word(char *id, char *file){
 
 int main(){
 
-	char id[32];
-	printf("Enter a keyword: ");
+	char id[5];
+	printf("Enter an operator: ");
 	scanf("%s", id);
 	printf("-----------------------------\n");
 
 	// Check whether Keyword is valid or not
-	int matched = match_word(id, "Keywords.txt");
+	int matched = match_word(id, "Operators.txt");
 	if(matched==-1){
-		printf("ERROR: Invalid Keyword\n");
+		printf("ERROR: Invalid Operator\n");
 	}
 	else{
-		printf("Valid Keyword\n");
+		printf("Valid Operator\n");
 		// Append to Symbol Table if not present
-		int present = match_word(id, "SymbolTableKeyword.txt");
+		int present = match_word(id, "SymbolTableOperator.txt");
 		if(present!=-1)
 			printf("-> Present at index %d\n", present);
 		else{
-			FILE *fpa = fopen("SymbolTableKeyword.txt","a");
+			FILE *fpa = fopen("SymbolTableOperator.txt","a");
 			fprintf(fpa, "%s\n", id);
 			fclose(fpa);
 		}
