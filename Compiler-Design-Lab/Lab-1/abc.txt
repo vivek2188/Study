@@ -1,0 +1,1 @@
+#include<iostream>#include<fstream>usingnamespacestd;intmain(){charch;ifstreamin;intctr=0;in.open("count_operators.cpp");while((in>>ch)){if(ch=='+'||ch=='-'||ch=='*'||ch=='/')ctr++;}cout<<"No.ofoperators:"<<ctr<<"\n";return0;}
