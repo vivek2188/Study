@@ -4,3 +4,4 @@ bitch
 okay
 vive
 vie
+my_array
