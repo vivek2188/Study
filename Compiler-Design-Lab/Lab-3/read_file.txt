@@ -3,3 +3,12 @@ is
 vivek
 tiwari
 "int"
+bool
+frank
+coolect
+_var
+43532
+break
+continuey2
+continue
+continu
