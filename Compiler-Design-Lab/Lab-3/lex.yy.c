@@ -438,8 +438,8 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "count_char.l"
 #line 2 "count_char.l"
-	int char_count = 0;	
-	int new_line_character = 0;	
+	int char_count = 0;
+	int new_line_character = 0;
 #line 444 "lex.yy.c"
 #line 445 "lex.yy.c"
 
@@ -729,16 +729,15 @@ case 2:
 YY_RULE_SETUP
 #line 9 "count_char.l"
 {
-	char_count++;
 	new_line_character++;
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 13 "count_char.l"
+#line 12 "count_char.l"
 ECHO;
 	YY_BREAK
-#line 742 "lex.yy.c"
+#line 741 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1743,13 +1742,13 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 13 "count_char.l"
+#line 12 "count_char.l"
 
 int main(){
 	yyin = fopen("read_file.txt", "r");
 	yylex();
-	printf("There are %d number of characters \
-and %d number of new line.\n", char_count, new_line_character);
+	printf("There are %d characters and %d new line characters.\n",\
+		char_count, new_line_character);
 	return 0;
 }
 
