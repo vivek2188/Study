@@ -68,7 +68,7 @@ if __name__=="__main__":
     for i, gv_i in enumerate(gv):
         print('-> gv[{}]: {:.2f}'.format(i, gv_i))
 
-    # SINGLE EXPONENTIAL PACING
+    # SINGLE STEP PACING
     print('Single Step Pacing: ')
     gv = single_step_pacing()
     for i, gv_i in enumerate(gv):
